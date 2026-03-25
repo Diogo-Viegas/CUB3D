@@ -1,32 +1,30 @@
 #include "cub3d.h"
 #include "./libft/libft.h"
 
-int is_map_line(char *line)
+int is_config_line(char *line)
 {
-    int i = 0;
-    int has_map_char = 0;
-    while (line[i])
-    {
-        if(line[i] != ' ' && line[i] != '1' && 
-            line[i] != '0' && line[i] != 'N' && 
-            line[i] != 'S' && line[i] != 'W' && line[i] != 'E')
-            return (0);
-        if(line[i] != ' ')
-            has_map_char = 1;
-        i++;
-    }
-    return (has_map_char);
+    line = skip_spaces(line);
+    return(starts_with(line, "NO ") ||
+            starts_with(line,"SO ") ||
+            starts_with(line,"WE ") ||
+            starts_with(line,"EA ") ||
+            starts_with(line,"F ")  ||
+            starts_with(line,"C "));
 }
 int find_map_start(char **lines)
 {
     int i = 0;
     while (lines[i])
-    {
-        if (is_map_line(lines[i]))
-            return (i);
         i++;
-    }
-    return (-1);
+    // percorre de baixo para cima
+    i--;
+    while (i >= 0 && is_empty_line(lines[i]))
+        i--;
+    // agora lines[i] é a última linha do mapa
+    // sobe até encontrar a primeira linha de mapa
+    while (i >= 0 && !is_config_line(lines[i]) && !is_empty_line(lines[i]))
+        i--;
+    return (i + 1);
 }
 
 void trim_newline(char *line)
@@ -44,7 +42,7 @@ int count_lines(char *file)
 
     fd = open(file,O_RDONLY);
     if(fd < 0)
-        printf("Failed to open file at count liness\n");
+        error_exit("Failed to open file at count liness");
     while((line = get_next_line(fd)))
     {
         count++;
@@ -66,21 +64,19 @@ char **read_file(char *file)
     char *line;
     if(!is_cub(file))
     {
-        printf("File must have .cub extension\n");
-        exit(1);
+        error_exit("File must have .cub extension");
     }
     count = count_lines(file);
     if(count == 0)
     {
-        printf("File is empty\n");
-        exit(1);
+        error_exit("File is empty");
     }
     fd = open(file,O_RDONLY);
     if(fd < 0)
-        printf("Failed to open file at read file\n");
+        error_exit("Failed to open file at read file");
     lines = malloc(sizeof(char *) * (count + 1));
     if(!lines)
-        printf("Malloc failed\n");
+        error_exit("Malloc failed");
     while((line = get_next_line(fd)))
     {
         trim_newline(line);
@@ -95,10 +91,14 @@ int main(int argc, char **argv)
 
     if (argc < 2)
     {
-        perror("Expected 2 arguments");
+        printf("Expected 2 arguments");
         return (1);
     }
     t_config cfg;
+    cfg.no = NULL;
+    cfg.so = NULL;
+    cfg.we = NULL;
+    cfg.ea = NULL;
     cfg.floor = -1;
     cfg.ceiling = -1;
     char *filename = argv[1];
@@ -108,7 +108,7 @@ int main(int argc, char **argv)
     lines = read_file(filename);
     if (!lines)
     {
-        perror("Failed to read file\n");
+        error_exit("Failed to read file\n");
         return (1);
     }
     // while (lines[i])
@@ -119,7 +119,7 @@ int main(int argc, char **argv)
     int map_start = find_map_start(lines);       
     //printf("Map starts at line: %d\n", map_start);
     parse_config(lines,map_start,&cfg);
-    printf("-----CONFIG------\n[NO] -> %s\n[SO] -> %s\n[WE] -> %s\n[EA] -> %s\n [FLOOR] -> %d\n[CEILING] -> %d\n",cfg.no,cfg.so,cfg.we,cfg.ea,cfg.floor,cfg.ceiling);
+    printf("-----CONFIG------\n[NO] -> %s\n[SO] -> %s\n[WE] -> %s\n[EA] -> %s\n[FLOOR] -> %d\n[CEILING] -> %d\n",cfg.no,cfg.so,cfg.we,cfg.ea,cfg.floor,cfg.ceiling);
     i = 0; 
     while (lines[i])
         free(lines[i++]);

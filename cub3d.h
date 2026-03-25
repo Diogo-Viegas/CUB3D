@@ -25,6 +25,7 @@ void validate_config(t_config *cfg);
 void parse_config(char **lines, int map_start,t_config *cfg);
 
 //parse_config_utils.c
+void    error_exit(char *msg);
 char	*skip_spaces(char *line);
 int	is_empty_line(char *line);
 int starts_with(char *line, char *prefix);

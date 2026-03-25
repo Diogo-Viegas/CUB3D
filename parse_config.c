@@ -24,25 +24,35 @@ void parse_texture_line(char *line,t_config *cfg)
     else if(starts_with(line,"WE "))
         set_texture(&cfg->we,line + 2);
     else if(starts_with(line,"EA "))
-        set_texture(&cfg->we,line + 2);
+        set_texture(&cfg->ea,line + 2);
     else
-        printf("Invalid texture identifier\n");
+        error_exit("Invalid texture identifier");
 }
 
 void parse_color_line(char *line,t_config *cfg)
-{
+{   
+
     line = skip_spaces(line);
     if(starts_with(line,"F "))
-        cfg->floor = parse_color(line + 1);
+    {
+        if(cfg->floor != -1)
+            error_exit("Duplicate floor color");
+         cfg->floor = parse_color(line + 2);
+    }       
     else if(starts_with(line, "C "))
-        cfg->ceiling = parse_color(line + 1);
+    {
+        if(cfg->ceiling != -1)
+            error_exit("Duplicate ceiling color");
+        cfg->ceiling = parse_color(line + 2);
+    }
+        
 }
 void validate_config(t_config *cfg)
 {
     if(!cfg->no || !cfg->so || !cfg->we || !cfg->ea)
-        printf("Missing Textures\n");
+        error_exit("Missing Textures");
     if(cfg->ceiling == -1 || cfg->floor == -1)
-        printf("Missing Color\n");
+        error_exit("Missing Color");
 }
 void parse_config(char **lines, int map_start,t_config *cfg)
 {
@@ -56,8 +66,8 @@ void parse_config(char **lines, int map_start,t_config *cfg)
         else if(is_color_line(lines[i]))
             parse_color_line(lines[i],cfg);
         else
-            printf("Invalid config line\n");
+            error_exit("Invalid config line");
         i++;
     }
-    //validate_config(cfg);
+   validate_config(cfg);
 }
