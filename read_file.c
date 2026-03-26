@@ -86,6 +86,23 @@ char **read_file(char *file)
     close(fd);
     return(lines);
 }
+
+
+void print_map(t_map map)
+{
+    printf("--------------MAP--------------\n");
+    printf("Height -> %d\n",map.height);
+    printf("Width -> %d\n",map.width);
+
+    int i = 0;
+    while(i < map.height)
+    {
+        printf("%s\n",map.grid[i]);
+        i++;
+    }
+    printf("--------------------");
+}
+
 int main(int argc, char **argv)
 {
 
@@ -101,6 +118,11 @@ int main(int argc, char **argv)
     cfg.ea = NULL;
     cfg.floor = -1;
     cfg.ceiling = -1;
+    t_map map;
+    map.grid = NULL;
+    map.height = 0;
+    map.width = 0;
+
     char *filename = argv[1];
     char **lines;
     int i = 0;
@@ -121,6 +143,8 @@ int main(int argc, char **argv)
     parse_config(lines,map_start,&cfg);
     printf("-----CONFIG------\n[NO] -> %s\n[SO] -> %s\n[WE] -> %s\n[EA] -> %s\n[FLOOR] -> %d\n[CEILING] -> %d\n",cfg.no,cfg.so,cfg.we,cfg.ea,cfg.floor,cfg.ceiling);
     i = 0; 
+    extract_map(lines,map_start,&map);
+    print_map(map);
     while (lines[i])
         free(lines[i++]);
     free(lines);

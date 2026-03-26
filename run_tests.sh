@@ -14,7 +14,7 @@ for file in maps/valid/*.cub; do
     fi
 done
 
-echo "\n==== INVALID MAPS ===="
+echo "==== INVALID MAPS ===="
 for file in maps/invalid/*.cub; do
     ./cub3D "$file" > /dev/null 2>&1
     if [ $? -ne 0 ]; then

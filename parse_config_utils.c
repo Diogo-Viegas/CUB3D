@@ -96,7 +96,6 @@ int count_split(char **split)
 int is_valid_number(char *s)
 {
     s = skip_spaces(s);
-    printf("valid s -> %s\n",s);
     if (!*s)
         return (0);
     while (*s)
