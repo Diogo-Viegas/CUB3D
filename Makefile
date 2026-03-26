@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC = read_file.c \
       parse_config.c \
-      parse_config_utils.c extract_map.c
+      parse_config_utils.c extract_map.c main.c validate_map.c \
 
 OBJ = $(SRC:.c=.o)
 

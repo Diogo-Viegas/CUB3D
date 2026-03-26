@@ -49,5 +49,9 @@ int count_split(char **split);
 int parse_color(char *line);
 //extract_map.c
 int extract_map(char **lines, int start, t_map *map);
-
+//read_line.c
+char **read_file(char *file);
+int find_map_start(char **lines);
+//validate_map.c
+int validate_map(t_map *map);
 #endif
