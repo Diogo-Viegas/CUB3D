@@ -101,8 +101,6 @@ int flood_fill(char **map,int x, int y,t_map *data)
 {
     if(x < 0 || y < 0 || x >= data->height || y >= data->width)
         return (0);
-    if(map[x][y] == ' ')
-        return (0);
     if(map[x][y] == '1' || map[x][y] == 'V')
         return (1);
     map[x][y] = 'V';
@@ -127,12 +125,12 @@ int check_closed(t_map *map)
     find_player(map,&x,&y);
     copy = copy_map(map);
     printf("[Player] -> [%d] [%d]\n",x,y);
-    int i = 0;
-    while(i < map->height)
-    {
-        printf("line -> %s\n",copy[i]);
-        i++;
-    }
+    //int i = 0;
+    // while(i < map->height)
+    // {
+    //     printf("line -> %s\n",copy[i]);
+    //     i++;
+    // }
     valid = flood_fill(copy,x,y,map);
     //free_map(map);
     return (valid);

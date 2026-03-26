@@ -23,14 +23,13 @@ int main(int argc, char **argv)
         printf("Expected 2 arguments");
         return (1);
     }
-    t_config cfg;
-    cfg.no = NULL;
-    cfg.so = NULL;
-    cfg.we = NULL;
-    cfg.ea = NULL;
-    cfg.floor = -1;
-    cfg.ceiling = -1;
     t_map map;
+    map.no = NULL;
+    map.so = NULL;
+    map.we = NULL;
+    map.ea = NULL;
+    map.floor = -1;
+    map.ceiling = -1;
     map.grid = NULL;
     map.height = 0;
     map.width = 0;
@@ -52,8 +51,8 @@ int main(int argc, char **argv)
     // }
     int map_start = find_map_start(lines);       
     //printf("Map starts at line: %d\n", map_start);
-    parse_config(lines,map_start,&cfg);
-    printf("-----CONFIG------\n[NO] -> %s\n[SO] -> %s\n[WE] -> %s\n[EA] -> %s\n[FLOOR] -> %d\n[CEILING] -> %d\n",cfg.no,cfg.so,cfg.we,cfg.ea,cfg.floor,cfg.ceiling);
+    parse_config(lines,map_start,&map);
+    printf("-----CONFIG------\n[NO] -> %s\n[SO] -> %s\n[WE] -> %s\n[EA] -> %s\n[FLOOR] -> %d\n[CEILING] -> %d\n",map.no,map.so,map.we,map.ea,map.floor,map.ceiling);
     i = 0; 
     extract_map(lines,map_start,&map);
     validate_map(&map);

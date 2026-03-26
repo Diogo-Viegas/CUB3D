@@ -6,16 +6,6 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-typedef struct s_config
-{
-    char *no;
-    char *so;
-    char *we;
-    char *ea;
-    int floor; //default -1;
-    int ceiling; //default -1;
-}t_config;
-
 typedef struct s_player
 {
     int x;
@@ -28,16 +18,22 @@ typedef struct s_map
     char **grid;
     int width;
     int height;
+    char *no;
+    char *so;
+    char *we;
+    char *ea;
+    int floor; //default -1;
+    int ceiling; //default -1;
     //t_player player;
 }t_map;
 
 //parse_config.c
 int is_color_line(char *line);
 int is_texture_line(char *line);
-void parse_texture_line(char *line,t_config *cfg);
-void parse_color_line(char *line,t_config *cfg);
-void validate_config(t_config *cfg);
-void parse_config(char **lines, int map_start,t_config *cfg);
+void parse_texture_line(char *line,t_map *map);
+void parse_color_line(char *line,t_map *map);
+void validate_config(t_map *map);
+void parse_config(char **lines, int map_start,t_map *map);
 
 //parse_config_utils.c
 void    error_exit(char *msg);
