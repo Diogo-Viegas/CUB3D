@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:00:08 by dviegas           #+#    #+#             */
-/*   Updated: 2026/03/26 12:39:03 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/03/26 17:57:45 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,23 @@ int check_player(t_map *map)
 }
 void find_player(t_map *map, int *x,int *y)
 {
-    int i;
-    int j;
-    i = 0;
-    while(i < map->height)
+    int row;
+    int col;
+    row = 0;
+    while(row < map->height)
     {
-        j = 0;
-        while(j < map->width)
+        col = 0;
+        while(col < map->width)
         {
-            if(is_player(map->grid[i][j]))
+            if(is_player(map->grid[row][col]))
             {
-                *x = i;
-                *y = j;
+                *x = col;
+                *y = row;
                 return; 
             }
-            j++;
+            col++;
         }
-        i++;
+        row++;
     }
 }
 char **copy_map(t_map *map)
@@ -99,11 +99,13 @@ char **copy_map(t_map *map)
 }
 int flood_fill(char **map,int x, int y,t_map *data)
 {
-    if(x < 0 || y < 0 || x >= data->height || y >= data->width)
+    if(x < 0 || y < 0 || x >= data->width || y >= data->height)
         return (0);
-    if(map[x][y] == '1' || map[x][y] == 'V')
+    if(map[y][x] == ' ')
+        return (0);
+    if(map[y][x] == '1' || map[y][x] == 'V')
         return (1);
-    map[x][y] = 'V';
+    map[y][x] = 'V';
     if(!flood_fill(map,x + 1,y,data))
         return (0);
     if(!flood_fill(map,x - 1,y,data))
