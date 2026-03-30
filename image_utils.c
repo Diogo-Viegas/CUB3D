@@ -49,3 +49,12 @@ void render_map(t_game *game)
         y++;
     }
 }
+void	render_player(t_game *game)
+{
+	int	px;
+	int	py;
+
+	px = (int)(game->player.x * TILE_SIZE);
+	py = (int)(game->player.y * TILE_SIZE);
+	draw_square(&game->screen, px - 4, py - 4, 8, 0xFF0000);
+}
