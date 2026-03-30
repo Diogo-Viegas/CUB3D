@@ -69,7 +69,6 @@ void render_player_direction(t_game *game)
         x = start_x + (end_x - start_x) * i/ 20.0;
         y = start_y + (end_y - start_y) * i / 20.0;
         put_pixel(&game->screen,(int)x,(int)y,0x00FF00);
-         put_pixel(&game->screen,(int)x + 2,(int)y + 2,0x00FF00);
         i++;
     }
 }
