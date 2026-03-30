@@ -5,13 +5,38 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include "libft/libft.h"
+typedef struct s_img
+{
+    void *img_ptr;
+    char *addr;
+    int bpp;
+    int line_len;
+    int endian;
+    int width;
+    int height;
+}t_img;
 
 typedef struct s_player
 {
-    int x;
-    int y;
-    char dir;
+    double x;
+    double y;
+    double dir_x;
+    double dir_y;
+    double plane_x;
+    double plane_y;
 }t_player;
+
+typedef struct s_keys
+{
+    int w;
+    int a;
+    int s;
+    int d;
+    int left;
+    int right;
+}t_keys;
+
 
 typedef struct s_map
 {
@@ -24,8 +49,19 @@ typedef struct s_map
     char *ea;
     int floor; //default -1;
     int ceiling; //default -1;
-    //t_player player;
 }t_map;
+
+typedef struct s_game
+{
+    void *mlx;
+    void *win;
+    int win_width;
+    int win_height;
+    t_player player;
+    t_map map;
+    t_keys keys;
+    t_img screen;
+}t_game;
 
 //parse_config.c
 int is_color_line(char *line);
@@ -50,4 +86,7 @@ char **read_file(char *file);
 int find_map_start(char **lines);
 //validate_map.c
 int validate_map(t_map *map);
+//init_game.c
+void parse_file(t_map *map,char *filename);
+void  init_game(t_game *game);
 #endif
