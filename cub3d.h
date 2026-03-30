@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include "libft/libft.h"
+#include <math.h>
 #include "minilibx-linux/mlx.h"
 typedef struct s_img
 {
@@ -101,4 +102,6 @@ void draw_square(t_img *img,int start_x,int start_y,int size,int color);
 void render_map(t_game *game);
 void	render_player(t_game *game);
 void render_player_direction(t_game *game);
+//keys.c
+int key_press(int keycode, t_game *game);
 #endif

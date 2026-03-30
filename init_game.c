@@ -95,7 +95,7 @@ void init_player(t_game *game)
     
     dir = find_player(&game->map,&x,&y);
     game->player.x = x + 0.5;
-    game->player.y = y + 0.5;
+    game->player.y = y + 0.5 ;
     set_player_dir(&game->player,dir);
     game->map.grid[y][x] = '0';
     set_player_fov(&game->player,dir);

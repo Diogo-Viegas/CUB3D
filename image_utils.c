@@ -61,14 +61,15 @@ void render_player_direction(t_game *game)
 
     start_x = game->player.x * TILE_SIZE;
     start_y = game->player.y * TILE_SIZE;
-    end_x   = start_x + (game->player.dir_x * 20);
-    end_y   = start_y + (game->player.dir_y * 20);
+    end_x   = start_x + (game->player.dir_x * 50);
+    end_y   = start_y + (game->player.dir_y * 50);
     i = 0;
     while(i <= 20)
     {
         x = start_x + (end_x - start_x) * i/ 20.0;
         y = start_y + (end_y - start_y) * i / 20.0;
         put_pixel(&game->screen,(int)x,(int)y,0x00FF00);
+         put_pixel(&game->screen,(int)x + 2,(int)y + 2,0x00FF00);
         i++;
     }
 }
@@ -79,5 +80,5 @@ void	render_player(t_game *game)
 
 	px = (int)(game->player.x * TILE_SIZE);
 	py = (int)(game->player.y * TILE_SIZE);
-	draw_square(&game->screen, px - 4, py - 4, TILE_SIZE / 2, 0xFF0000);
+	draw_square(&game->screen, px - 4, py - 4, 8, 0xFF0000);
 }
