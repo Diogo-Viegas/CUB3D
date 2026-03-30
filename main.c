@@ -17,6 +17,7 @@ int main(int argc, char **argv)
     init_mlx(&game);
     render_map(&game);
     render_player(&game);
+    render_player_direction(&game);
     mlx_put_image_to_window(game.mlx,game.win,game.screen.img_ptr,0,0);
     mlx_hook(game.win,17,0,close_game,&game);
     mlx_hook(game.win,2,1L<<0,esc_close,&game);

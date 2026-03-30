@@ -83,8 +83,8 @@ void set_player_fov(t_player *player,char dir)
     }
     else if(dir == 'E')
     {
-        player->dir_x = 0;
-        player->dir_y = -0.66;
+        player->plane_x = 0;
+        player->plane_y = -0.66;
     }
 }
 void init_player(t_game *game)

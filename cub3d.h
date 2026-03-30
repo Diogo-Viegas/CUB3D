@@ -100,4 +100,5 @@ int esc_close(int keycode, t_game *game);
 void draw_square(t_img *img,int start_x,int start_y,int size,int color);
 void render_map(t_game *game);
 void	render_player(t_game *game);
+void render_player_direction(t_game *game);
 #endif
