@@ -13,5 +13,6 @@ int main(int argc, char **argv)
     t_game game;
     init_game(&game);
     parse_file(&game.map,argv[1]);
+    init_player(&game);
     return (0);
 }

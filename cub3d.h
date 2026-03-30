@@ -86,7 +86,9 @@ char **read_file(char *file);
 int find_map_start(char **lines);
 //validate_map.c
 int validate_map(t_map *map);
+char find_player(t_map *map, int *x,int *y);
 //init_game.c
 void parse_file(t_map *map,char *filename);
+void init_player(t_game *game);
 void  init_game(t_game *game);
 #endif

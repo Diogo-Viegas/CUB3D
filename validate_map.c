@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:00:08 by dviegas           #+#    #+#             */
-/*   Updated: 2026/03/26 17:57:45 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/03/30 12:05:54 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int check_player(t_map *map)
     }
     return (count == 1);
 }
-void find_player(t_map *map, int *x,int *y)
+char find_player(t_map *map, int *x,int *y)
 {
     int row;
     int col;
@@ -76,12 +76,13 @@ void find_player(t_map *map, int *x,int *y)
             {
                 *x = col;
                 *y = row;
-                return; 
+                return(map->grid[*y][*x]); 
             }
             col++;
         }
         row++;
     }
+    return ('0');
 }
 char **copy_map(t_map *map)
 {
@@ -126,13 +127,6 @@ int check_closed(t_map *map)
     int valid;
     find_player(map,&x,&y);
     copy = copy_map(map);
-    printf("[Player] -> [%d] [%d]\n",x,y);
-    //int i = 0;
-    // while(i < map->height)
-    // {
-    //     printf("line -> %s\n",copy[i]);
-    //     i++;
-    // }
     valid = flood_fill(copy,x,y,map);
     //free_map(map);
     return (valid);
