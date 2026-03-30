@@ -9,14 +9,19 @@ SRC = read_file.c \
       extract_map.c \
       main.c \
       validate_map.c \
-	  init_game.c
+      init_game.c \
+      init_mlx.c image_utils.c
 
 OBJ = $(SRC:.c=.o)
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-INCLUDES = -I$(LIBFT_DIR)
+MLX_DIR = minilibx-linux
+MLX = $(MLX_DIR)/libmlx.a
+
+INCLUDES = -I$(LIBFT_DIR) -I$(MLX_DIR)
+LDFLAGS = $(LIBFT) $(MLX) -lXext -lX11 -lm
 
 GREEN = \033[0;32m
 YELLOW = \033[0;33m
@@ -26,14 +31,18 @@ RESET = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
 	@echo "$(BLUE)🔗 Linking $(NAME)...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)✅ $(NAME) created!$(RESET)"
 
 $(LIBFT):
 	@echo "$(YELLOW)📚 Compiling libft...$(RESET)"
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory -s
+
+$(MLX):
+	@echo "$(YELLOW)🖼️  Compiling MiniLibX...$(RESET)"
+	@$(MAKE) -C $(MLX_DIR) --no-print-directory -s
 
 %.o: %.c
 	@echo "$(YELLOW)⚙️  Compiling $<...$(RESET)"
@@ -43,6 +52,7 @@ clean:
 	@echo "$(RED)🧹 Cleaning objects...$(RESET)"
 	@rm -f $(OBJ)
 	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory -s
+	@$(MAKE) -C $(MLX_DIR) clean --no-print-directory -s
 
 fclean: clean
 	@echo "$(RED)🔥 Removing $(NAME)...$(RESET)"

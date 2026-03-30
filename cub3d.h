@@ -1,11 +1,12 @@
 #ifndef CUB32_H
 # define CUB32_H
-
+#define TILE_SIZE 32
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include "libft/libft.h"
+#include "minilibx-linux/mlx.h"
 typedef struct s_img
 {
     void *img_ptr;
@@ -91,4 +92,11 @@ char find_player(t_map *map, int *x,int *y);
 void parse_file(t_map *map,char *filename);
 void init_player(t_game *game);
 void  init_game(t_game *game);
+//init_mlx.c
+void init_mlx(t_game *game);
+int close_game(t_game *game);
+int esc_close(int keycode, t_game *game);
+//image_utils
+void draw_square(t_img *img,int start_x,int start_y,int size,int color);
+void render_map(t_game *game);
 #endif

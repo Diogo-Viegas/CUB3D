@@ -16,8 +16,6 @@ void print_map(t_map *map)
 void init_game(t_game *game)
 {
     ft_memset(game,0,sizeof(t_game));
-    game->win_width = 1280;
-    game->win_height = 720;
     game->map.ceiling = -1;
     game->map.floor = -1;
 }
