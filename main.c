@@ -1,10 +1,12 @@
 #include "cub3d.h"
 
-int game_loop(t_game *game)
+int game_loop(t_game *game, t_img *img)
 {
+	clear_img(img->width, img->height ,&game->screen);
     render_map(game);
     render_player(game);
     render_player_direction(game);
+	cast_rays(game);
     mlx_put_image_to_window(game->mlx,game->win,game->screen.img_ptr,0,0);
     return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:00:08 by dviegas           #+#    #+#             */
-/*   Updated: 2026/03/30 12:24:31 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/02 12:50:19 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int validate_map(t_map *map)
     if(!check_chars(map))
         error_exit("Invalid characters in map");
     if(!check_player(map))
-        error_exit("Invalid number of players, only one player is valid");
+        error_exit("Invalid num ber of players, only one player is valid");
     if(!check_closed(map))
         error_exit("Map is not closed\n");
     return (1);
