@@ -1,6 +1,6 @@
 #ifndef CUB32_H
 # define CUB32_H
-# define TILE_SIZE 128
+# define TILE_SIZE 32
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include <fcntl.h>
@@ -127,10 +127,10 @@ void			render_player_direction(t_game *game);
 int				key_press(int keycode, t_game *game);
 
 // raycasting.c
-void			init_ray(t_ray *ray, t_player *player, int x, t_map *map);
+void			init_ray(t_ray *ray, t_game *game, int x);
 void clear_img(int width, int height, t_img *img);
 void			init_dda(t_ray *ray, t_player *player);
-void			perform_dda(t_ray *ray, char **map);
+void			perform_dda(t_ray *ray, t_game *game);
 void			calc_dist(t_ray *ray);
 void draw_ray(t_img *img, t_player *player, t_ray *ray);
 void			cast_rays(t_game *game);

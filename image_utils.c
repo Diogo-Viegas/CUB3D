@@ -32,13 +32,13 @@ void render_map(t_game *game)
     int x;
 
     y = 0;
-    while(y < game->map.height)
+    while (y < game->map.height)
     {
         x = 0;
         while(x < game->map.width)
         {
             if(game->map.grid[y][x] == '1')
-                draw_square(&game->screen,x * TILE_SIZE, y * TILE_SIZE,TILE_SIZE,0x000080);
+                draw_square(&game->screen,x * TILE_SIZE, y * TILE_SIZE,TILE_SIZE,0x00080);
         
             else if(game->map.grid[y][x] == '0')
                 draw_square(&game->screen,x * TILE_SIZE,y * TILE_SIZE,TILE_SIZE,0xff00ff);

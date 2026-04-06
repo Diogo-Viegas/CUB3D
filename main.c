@@ -1,8 +1,8 @@
 #include "cub3d.h"
 
-int game_loop(t_game *game, t_img *img)
+int game_loop(t_game *game)
 {
-	clear_img(img->width, img->height ,&game->screen);
+	clear_img(game->win_width,game->win_height,&game->screen);
     render_map(game);
     render_player(game);
     render_player_direction(game);

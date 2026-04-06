@@ -54,12 +54,12 @@ void set_player_dir(t_player *player,char dir)
     }
     else if(dir == 'W')
     {
-        player->dir_x = 1;
+        player->dir_x = -1;
         player->dir_y = 0;
     }
     else if(dir == 'E')
     {
-        player->dir_x = -1;
+        player->dir_x = 1;
         player->dir_y = 0;
 
     }
@@ -79,12 +79,12 @@ void set_player_fov(t_player *player,char dir)
     else if(dir == 'W')
     {
         player->plane_x = 0;
-        player->plane_y = 0.66;
+        player->plane_y = -0.66;
     }
     else if(dir == 'E')
     {
         player->plane_x = 0;
-        player->plane_y = -0.66;
+        player->plane_y = 0.66;
     }
 }
 void init_player(t_game *game)

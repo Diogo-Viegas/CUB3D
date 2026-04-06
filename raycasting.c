@@ -1,20 +1,37 @@
 #include "cub3d.h"
-void init_ray(t_ray *ray, t_player *player, int x, t_map *map)
+void init_ray(t_ray *ray, t_game *game,int x)
 {
-	ray->cameraX = 2 * x / (double)map->width -1;
-	ray->rayDirX = player->dir_x + player->plane_x * ray->cameraX;
-	ray->rayDirY = player->dir_y + player->plane_y * ray->cameraX;
-	ray->mapX = (int)player->x;
-	ray->mapY = (int)player->y;
-	ray->deltaDistX = fabs(1 / ray->rayDirX);
-	ray->deltaDistY = fabs(1 / ray->rayDirY);
+	ray->cameraX = 2 * x / (double)game->win_width -1;
+	ray->rayDirX = game->player.dir_x + game->player.plane_x * ray->cameraX;
+	ray->rayDirY = game->player.dir_y + game->player.plane_y * ray->cameraX;
+	ray->mapX = (int)game->player.x;
+	ray->mapY = (int)game->player.y;
+	if(ray->rayDirX == 0)
+		ray->deltaDistX = 1e30;
+	else
+		ray->deltaDistX =  fabs(1 / ray->rayDirX);
+	if(ray->rayDirY == 0)
+		ray->deltaDistY = 1e30;
+	else
+		ray->deltaDistY =  fabs(1 / ray->rayDirY);
 	ray->hit = 0;
 }
 void clear_img(int width, int height, t_img *img)
 {
-	for(int y = 0; y < width; y++)
-		for(int x = 0; x < height; x++)
+	int y;
+	int x;
+
+	y = 0;
+	while(y < height)
+	{
+		x = 0;
+		while(x < width)
+		{
 			put_pixel(img, x, y, 0x000000);
+			x++;
+		}
+		y++;
+	}
 }
 
 void init_dda(t_ray *ray, t_player *player)
@@ -41,16 +58,14 @@ void init_dda(t_ray *ray, t_player *player)
 	}
 }
 
-void perform_dda(t_ray *ray, char **map)
+void	perform_dda( t_ray *ray,t_game *game)
 {
-	while(ray->hit == 0)
+	while (ray->hit == 0)
 	{
-		if (ray->mapX < 0 || ray->mapY < 0 || map[ray->mapY] == NULL || map[ray->mapY][ray->mapX] == '\0')
-			break;
-		if(ray->sideDistX < ray->sideDistY)
+		if (ray->sideDistX < ray->sideDistY)
 		{
 			ray->sideDistX += ray->deltaDistX;
-			ray->mapX += ray->stepX;
+			ray->mapX+= ray->stepX;
 			ray->side = 0;
 		}
 		else
@@ -59,7 +74,7 @@ void perform_dda(t_ray *ray, char **map)
 			ray->mapY += ray->stepY;
 			ray->side = 1;
 		}
-		if(map[ray->mapY][ray->mapX] == '1')
+		if (game->map.grid[ray->mapY][ray->mapX] == '1')
 			ray->hit = 1;
 	}
 }
@@ -73,24 +88,32 @@ void calc_dist(t_ray *ray)
 
 void draw_ray(t_img *img, t_player *player, t_ray *ray)
 {
-	int startX = player->x * TILE_SIZE;
-	int startY = player->y * TILE_SIZE;
+	int startX;
+	int startY;
+	int endX;
+	int endY;
 
-	int endX = (player->x + ray->rayDirX * ray->perpWallDist) * TILE_SIZE;
-	int endY = (player->y + ray->rayDirY * ray->perpWallDist) * TILE_SIZE;
-	draw_line(img, startX, startY, endX, endY, 0x00FF00);
+	startX = player->x * TILE_SIZE;
+	startY = player->y * TILE_SIZE;
+	endX = (player->x + ray->rayDirX * ray->perpWallDist) * TILE_SIZE;
+	endY = (player->y + ray->rayDirY * ray->perpWallDist) * TILE_SIZE;
+	draw_line(img,startX,startY,endX,endY,0x00FF00);
+
 }
 void	cast_rays(t_game *game)
 {
 	t_ray	ray;
+	int x;
 
-	for (int x = 0; x < 10; x++)
+	x = 0;
+	while(x < game->win_width)
 	{
-		init_ray(&ray, &game->player, x, &game->map);
+		init_ray(&ray,game,x);
 		init_dda(&ray, &game->player);
-		perform_dda(&ray, game->map.grid);
+		perform_dda(&ray, game);
 		calc_dist(&ray);
 		draw_ray(&game->screen, &game->player, &ray);
+		x += 20; //não desenhar demasiados raios e pesar o minimapa
 	}
 }
 void draw_line(t_img *img, int x0, int y0, int x1, int y1, int color)
