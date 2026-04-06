@@ -1,26 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/06 16:02:08 by dviegas           #+#    #+#             */
+/*   Updated: 2026/04/06 16:16:33 by dviegas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 //em que sitio da parede o raio bateu?
 void calc_wall_x(t_game *game, t_ray *ray)
 {
     if(ray->side == 0)
-        ray->wallx = game->player.y + ray->perpWallDist * ray->rayDirY;
+        ray->wallx = game->player.y + ray->wall_dist * ray->ray_dir_y;
     else 
-        ray->wallx =game->player.x + ray->perpWallDist * ray->rayDirX;
+        ray->wallx =game->player.x + ray->wall_dist * ray->ray_dir_x;
     ray->wallx -= floor(ray->wallx);
 }
 t_img *get_wall_texture(t_game *game, t_ray *ray)
 {
     if(ray->side == 0)
     {
-        if(ray->rayDirX > 0)
+        if(ray->ray_dir_x > 0)
             return (&game->texture_ea);
         else
             return (&game->texture_we);
     }
     else
     {
-        if(ray->rayDirY > 0)
+        if(ray->ray_dir_y > 0)
             return (&game->texture_so);
         else
             return(&game->texture_no);
@@ -29,15 +41,15 @@ t_img *get_wall_texture(t_game *game, t_ray *ray)
 
 void calc_texture_x(t_ray *ray, t_img *texture)
 {
-    ray->texX = (int)(ray->wallx * (double)texture->width);
-    if (ray->texX < 0)
-	    ray->texX = 0;
-    if (ray->texX >= texture->width)
-	    ray->texX = texture->width - 1;
-    if(ray->side == 0 && ray->rayDirX > 0)
-        ray->texX = texture->width - ray->texX - 1;
-    if(ray->side == 1 && ray->rayDirY < 0)
-        ray->texX = texture->width - ray->texX - 1;
+    ray->tex_x = (int)(ray->wallx * (double)texture->width);
+    if (ray->tex_x < 0)
+	    ray->tex_x = 0;
+    if (ray->tex_x >= texture->width)
+	    ray->tex_x = texture->width - 1;
+    if(ray->side == 0 && ray->ray_dir_x > 0)
+        ray->tex_x = texture->width - ray->tex_x - 1;
+    if(ray->side == 1 && ray->ray_dir_y < 0)
+        ray->tex_x = texture->width - ray->tex_x - 1;
 }
 int get_texture_pixel(t_img *img,int x,int y)
 {
@@ -52,24 +64,24 @@ void draw_textured_column(t_game *game, int x, t_ray *ray, t_img *texture)
 	int		color;
 
 	y = 0;
-	while (y < ray->drawStart)
+	while (y < ray->draw_start)
 	{
 		put_pixel(&game->screen, x, y, game->map.ceiling);
 		y++;
 	}
-	ray->step = (double)texture->height / ray->lineHeight;
-	ray->texPos = (ray->drawStart - game->win_height / 2
-			+ ray->lineHeight / 2) * ray->step;
-	while (y <= ray->drawEnd)
+	ray->step = (double)texture->height / ray->line_height;
+	ray->tex_pos = (ray->draw_start - game->win_height / 2
+			+ ray->line_height / 2) * ray->step;
+	while (y <= ray->draw_end)
 	{
-		texY = (int)ray->texPos;
+		texY = (int)ray->tex_pos;
 		if (texY < 0)
 			texY = 0;
 		if (texY >= texture->height)
 			texY = texture->height - 1;
-		color = get_texture_pixel(texture, ray->texX, texY);
+		color = get_texture_pixel(texture, ray->tex_x, texY);
 		put_pixel(&game->screen, x, y, color);
-		ray->texPos += ray->step;
+		ray->tex_pos += ray->step;
 		y++;
 	}
 	while (y < game->win_height)
@@ -96,6 +108,7 @@ void	load_texture(t_game *game, t_img *tex, char *path)
 		exit(1);
 	}
 }
+
 void	init_textures(t_game *game)
 {
 	load_texture(game, &game->texture_no, game->map.no);

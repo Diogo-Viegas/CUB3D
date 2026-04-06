@@ -4,8 +4,7 @@ void render_map(t_game *game)
 {
     int y;
     int x;
-    int screen_y;
-    int screen_x;
+	int pos[2];
     int color;
 
     y = 0;
@@ -14,13 +13,13 @@ void render_map(t_game *game)
         x = 0;
 	while (x < game->map.width)
 		{
-			screen_x = MINIMAP_OFFSET_X + x * MINIMAP_SCALE;
-			screen_y = MINIMAP_OFFSET_Y + y * MINIMAP_SCALE;
+			pos[0] = MINIMAP_OFFSET_X + x * MINIMAP_SCALE;
+			pos[1] = MINIMAP_OFFSET_Y + y * MINIMAP_SCALE;
 			if (game->map.grid[y][x] == '1')
 				color = 0xFFFFFF;
 			else
 				color = 0x222222;
-			draw_square(&game->screen, screen_x, screen_y, MINIMAP_SCALE, color);
+			draw_square(&game->screen,pos, MINIMAP_SCALE, color);
 			x++;
 		}
 		y++;
@@ -29,40 +28,35 @@ void render_map(t_game *game)
 
 void	render_player_direction(t_game *game)
 {
-	int	start_x;
-	int	start_y;
-	int	end_x;
-	int	end_y;
+	int	start[2];
+	int	end[2];
 
-	start_x = MINIMAP_OFFSET_X + game->player.x * MINIMAP_SCALE;
-	start_y = MINIMAP_OFFSET_Y + game->player.y * MINIMAP_SCALE;
-	end_x = start_x + game->player.dir_x * 15;
-	end_y = start_y + game->player.dir_y * 15;
-	draw_line(&game->screen, start_x, start_y, end_x, end_y, 0xFF0000);
+	start[0] = MINIMAP_OFFSET_X + game->player.x * MINIMAP_SCALE;
+	start[1] = MINIMAP_OFFSET_Y + game->player.y * MINIMAP_SCALE;
+	end[0] = start[0] + game->player.dir_x * 15;
+	end[1] = start[1] + game->player.dir_y * 15;
+	draw_line(&game->screen,start,end, 0xFF0000);
 }
 
 void	render_player(t_game *game)
 {
-	int	px;
-	int	py;
-    px = MINIMAP_OFFSET_X + game->player.x * MINIMAP_SCALE;
-	py = MINIMAP_OFFSET_Y + game->player.y * MINIMAP_SCALE;
-	draw_square(&game->screen, px - 2, py - 2, 4, 0xFF0000);
+	int	pos[2];
+    pos[0] = MINIMAP_OFFSET_X + game->player.x * MINIMAP_SCALE;
+	pos[1] = MINIMAP_OFFSET_Y + game->player.y * MINIMAP_SCALE;
+	draw_square(&game->screen,pos, 4, 0xFF0000);
 }
 void	draw_ray_minimap(t_img *img, t_player *player, t_ray *ray)
 {
-	int	startX;
-	int	startY;
-	int	endX;
-	int	endY;
+	int	start[2];
+	int	end[2];
 
-	startX = MINIMAP_OFFSET_X + player->x * MINIMAP_SCALE;
-	startY = MINIMAP_OFFSET_Y + player->y * MINIMAP_SCALE;
+	start[0] = MINIMAP_OFFSET_X + player->x * MINIMAP_SCALE;
+	start[1] = MINIMAP_OFFSET_Y + player->y * MINIMAP_SCALE;
 
-	endX = MINIMAP_OFFSET_X + (player->x + ray->rayDirX * ray->perpWallDist) * MINIMAP_SCALE;
-	endY = MINIMAP_OFFSET_Y + (player->y + ray->rayDirY * ray->perpWallDist) * MINIMAP_SCALE;
+	end[0] = MINIMAP_OFFSET_X + (player->x + ray->ray_dir_x * ray->wall_dist) * MINIMAP_SCALE;
+	end[1] = MINIMAP_OFFSET_Y + (player->y + ray->ray_dir_y * ray->wall_dist) * MINIMAP_SCALE;
 
-	draw_line(img, startX, startY, endX, endY, 0x00FF00);
+	draw_line(img, start,end, 0x00FF00);
 }
 
 void	render_minimap_rays(t_game *game)

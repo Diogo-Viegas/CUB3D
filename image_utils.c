@@ -9,7 +9,7 @@ void put_pixel(t_img *img,int x,int y,int color)
     *(unsigned int *)dst = color;
 }
 
-void draw_square(t_img *img,int start_x,int start_y,int size,int color)
+void draw_square(t_img *img,int pos[2],int size,int color)
 {
     int x;
     int y;
@@ -20,7 +20,7 @@ void draw_square(t_img *img,int start_x,int start_y,int size,int color)
         x = 0;
         while(x < size)
         {
-            put_pixel(img,start_x + x,start_y + y,color);
+            put_pixel(img,pos[0] + x,pos[1] + y,color);
             x++;
         }
         y++;

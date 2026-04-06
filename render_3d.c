@@ -1,17 +1,17 @@
 #include "cub3d.h"
 
 
-void draw_vertical_line(t_game *game, int x, int drawStart, int drawEnd, int color)
+void draw_vertical_line(t_game *game, int x, int draw_start, int draw_end, int color)
 {
     int y;
     
     y = 0;
-    while(y < drawStart)
+    while(y < draw_start)
     {
         put_pixel(&game->screen,x,y,game->map.ceiling);
         y++;
     }
-    while(y <= drawEnd)
+    while(y <= draw_end)
     {
         put_pixel(&game->screen,x,y,color);
         y++;
@@ -26,13 +26,13 @@ void draw_vertical_line(t_game *game, int x, int drawStart, int drawEnd, int col
 void calc_wall_height(t_game *game,t_ray *ray)
 {
     
-    ray->lineHeight = (int)(game->win_height / ray->perpWallDist);
-    printf("Ray->lineHeight : %d\n",ray->lineHeight);
-    ray->drawStart = -ray->lineHeight / 2 + game->win_height / 2;
-    ray->drawEnd = ray->lineHeight / 2 + game->win_height / 2;
-    if(ray->drawStart < 0)
-        ray->drawStart = 0;
-    if(ray->drawEnd >= game->win_height)
-        ray->drawEnd = game->win_height -1;
+    ray->line_height = (int)(game->win_height / ray->wall_dist);
+    printf("Ray->line_height : %d\n",ray->line_height);
+    ray->draw_start = -ray->line_height / 2 + game->win_height / 2;
+    ray->draw_end = ray->line_height / 2 + game->win_height / 2;
+    if(ray->draw_start < 0)
+        ray->draw_start = 0;
+    if(ray->draw_end >= game->win_height)
+        ray->draw_end = game->win_height -1;
 
 }
