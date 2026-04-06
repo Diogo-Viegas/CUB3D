@@ -10,7 +10,7 @@ SRC = read_file.c \
       main.c \
       validate_map.c \
       init_game.c \
-      init_mlx.c image_utils.c keys.c raycasting.c render_3d.c
+      init_mlx.c image_utils.c keys.c raycasting.c render_3d.c textures.c
 
 OBJ = $(SRC:.c=.o)
 

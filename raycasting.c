@@ -58,14 +58,14 @@ void init_dda(t_ray *ray, t_player *player)
 	}
 }
 
-void	perform_dda( t_ray *ray,t_game *game)
+void	perform_dda(t_ray *ray, t_game *game)
 {
 	while (ray->hit == 0)
 	{
 		if (ray->sideDistX < ray->sideDistY)
 		{
 			ray->sideDistX += ray->deltaDistX;
-			ray->mapX+= ray->stepX;
+			ray->mapX += ray->stepX;
 			ray->side = 0;
 		}
 		else
@@ -73,6 +73,12 @@ void	perform_dda( t_ray *ray,t_game *game)
 			ray->sideDistY += ray->deltaDistY;
 			ray->mapY += ray->stepY;
 			ray->side = 1;
+		}
+		if (ray->mapY < 0 || ray->mapY >= game->map.height
+			|| ray->mapX < 0 || ray->mapX >= game->map.width)
+		{
+			ray->hit = 1;
+			return ;
 		}
 		if (game->map.grid[ray->mapY][ray->mapX] == '1')
 			ray->hit = 1;
@@ -103,10 +109,8 @@ void draw_ray(t_img *img, t_player *player, t_ray *ray)
 void	cast_rays(t_game *game)
 {
 	t_ray	ray;
+	t_img  *texture;
 	int x;
-	int drawStart;
-	int drawEnd;
-	int color;
 
 	x = 0;
 	while(x < game->win_width)
@@ -115,12 +119,16 @@ void	cast_rays(t_game *game)
 		init_dda(&ray, &game->player);
 		perform_dda(&ray, game);
 		calc_dist(&ray);
-		calc_wall_height(game,&ray,&drawStart,&drawEnd);
-		color = 0x00FF00;
-		if(ray.side == 1)
-			color = 0x008800;
-		draw_vertical_line(game,x,drawStart,drawEnd,color);
+		calc_wall_height(game,&ray);
+		calc_wall_x(game,&ray);
+		//color = 0x00FF00;
+		//if(ray.side == 1)
+		//	color = 0x008800;
+		//draw_vertical_line(game,x,drawStart,drawEnd,color);
 		//draw_ray(&game->screen, &game->player, &ray);
+		texture = get_wall_texture(game, &ray);
+		calc_texture_x(&ray,texture);
+		draw_textured_column(game,x,&ray,texture);
 		x++;
 	}
 }

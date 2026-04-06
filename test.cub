@@ -1,7 +1,7 @@
-NO                  textures/ccc/bbb.xpm
-SO textures/ccc/bbb.xpm
-WE textures/ccc/bbb.xpm
-EA textures/ccc/bbb.xpm
+NO textures/wall.xpm
+SO textures/wall2.xpm
+WE textures/wall.xpm
+EA textures/wall.xpm
 
 F 164,169,20
 C 153,204,255

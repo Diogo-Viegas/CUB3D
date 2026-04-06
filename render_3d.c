@@ -23,16 +23,16 @@ void draw_vertical_line(t_game *game, int x, int drawStart, int drawEnd, int col
     }
 }
 
-void calc_wall_height(t_game *game,t_ray *ray,int *drawStart, int *drawEnd)
+void calc_wall_height(t_game *game,t_ray *ray)
 {
-    int lineHeight;
-
-    lineHeight = (int)(game->win_height / ray->perpWallDist);
-    *drawStart = -lineHeight / 2 + game->win_height / 2;
-    *drawEnd = lineHeight / 2 + game->win_height / 2;
-    if(*drawStart < 0)
-        *drawStart = 0;
-    if(*drawEnd >= game->win_height)
-        *drawEnd = game->win_height -1;
+    
+    ray->lineHeight = (int)(game->win_height / ray->perpWallDist);
+    printf("Ray->lineHeight : %d\n",ray->lineHeight);
+    ray->drawStart = -ray->lineHeight / 2 + game->win_height / 2;
+    ray->drawEnd = ray->lineHeight / 2 + game->win_height / 2;
+    if(ray->drawStart < 0)
+        ray->drawStart = 0;
+    if(ray->drawEnd >= game->win_height)
+        ray->drawEnd = game->win_height -1;
 
 }

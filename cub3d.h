@@ -62,6 +62,10 @@ typedef struct s_game
 	t_map		map;
 	t_keys		keys;
 	t_img		screen;
+	t_img		texture_no;
+	t_img		texture_so;
+	t_img		texture_ea;
+	t_img		texture_we;
 }				t_game;
 
 typedef struct s_ray
@@ -79,9 +83,16 @@ typedef struct s_ray
 
 	int			stepX;
 	int			stepY;
-
 	int			hit;
 	int			side;
+	int 		lineHeight;
+	int			drawStart;
+	int			drawEnd;
+	
+	double wallx;
+	int texX;
+	double step;
+	double texPos;
 }				t_ray;
 
 // parse_config.c
@@ -136,6 +147,12 @@ void draw_ray(t_img *img, t_player *player, t_ray *ray);
 void			cast_rays(t_game *game);
 void draw_line(t_img *img, int x0, int y0, int x1, int y1, int color);
 //render_3d.c
-void calc_wall_height(t_game *game,t_ray *ray,int *drawStart, int *drawEnd);
+void calc_wall_height(t_game *game,t_ray *ray);
 void draw_vertical_line(t_game *game, int x, int drawStart, int drawEnd, int color);
+//textures.c
+void calc_wall_x(t_game *game, t_ray *ray);
+void calc_texture_x(t_ray *ray, t_img *texture);
+void draw_textured_column(t_game *game,int x,t_ray *ray,t_img *texture);
+t_img *get_wall_texture(t_game *game, t_ray *ray);
+void	init_textures(t_game *game);
 #endif
