@@ -104,6 +104,9 @@ void	cast_rays(t_game *game)
 {
 	t_ray	ray;
 	int x;
+	int drawStart;
+	int drawEnd;
+	int color;
 
 	x = 0;
 	while(x < game->win_width)
@@ -112,8 +115,13 @@ void	cast_rays(t_game *game)
 		init_dda(&ray, &game->player);
 		perform_dda(&ray, game);
 		calc_dist(&ray);
-		draw_ray(&game->screen, &game->player, &ray);
-		x += 20; //não desenhar demasiados raios e pesar o minimapa
+		calc_wall_height(game,&ray,&drawStart,&drawEnd);
+		color = 0x00FF00;
+		if(ray.side == 1)
+			color = 0x008800;
+		draw_vertical_line(game,x,drawStart,drawEnd,color);
+		//draw_ray(&game->screen, &game->player, &ray);
+		x++;
 	}
 }
 void draw_line(t_img *img, int x0, int y0, int x1, int y1, int color)

@@ -135,4 +135,7 @@ void			calc_dist(t_ray *ray);
 void draw_ray(t_img *img, t_player *player, t_ray *ray);
 void			cast_rays(t_game *game);
 void draw_line(t_img *img, int x0, int y0, int x1, int y1, int color);
+//render_3d.c
+void calc_wall_height(t_game *game,t_ray *ray,int *drawStart, int *drawEnd);
+void draw_vertical_line(t_game *game, int x, int drawStart, int drawEnd, int color);
 #endif
