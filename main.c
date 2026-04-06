@@ -4,9 +4,10 @@ int game_loop(t_game *game)
 {
 	clear_img(game->win_width,game->win_height,&game->screen);
     cast_rays(game);
-    //render_map(game);
-    //render_player(game);
-    //render_player_direction(game);
+    render_map(game);
+    render_minimap_rays(game);
+    render_player(game);
+    render_player_direction(game);
     mlx_put_image_to_window(game->mlx,game->win,game->screen.img_ptr,0,0);
     return (0);
 }

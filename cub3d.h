@@ -1,6 +1,9 @@
 #ifndef CUB32_H
 # define CUB32_H
 # define TILE_SIZE 32
+# define MINIMAP_SCALE 8
+# define MINIMAP_OFFSET_X 10
+# define MINIMAP_OFFSET_Y 10
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include <fcntl.h>
@@ -131,9 +134,6 @@ int				esc_close(int keycode, t_game *game);
 void put_pixel(t_img *img,int x,int y,int color);
 void			draw_square(t_img *img, int start_x, int start_y, int size,
 					int color);
-void			render_map(t_game *game);
-void			render_player(t_game *game);
-void			render_player_direction(t_game *game);
 // keys.c
 int				key_press(int keycode, t_game *game);
 
@@ -155,4 +155,10 @@ void calc_texture_x(t_ray *ray, t_img *texture);
 void draw_textured_column(t_game *game,int x,t_ray *ray,t_img *texture);
 t_img *get_wall_texture(t_game *game, t_ray *ray);
 void	init_textures(t_game *game);
+//minimap.c
+void	draw_ray_minimap(t_img *img, t_player *player, t_ray *ray);
+void	render_minimap_rays(t_game *game);
+void			render_map(t_game *game);
+void			render_player(t_game *game);
+void			render_player_direction(t_game *game);
 #endif
