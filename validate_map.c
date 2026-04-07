@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:00:08 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/07 13:25:09 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/07 15:35:58 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ char **copy_map(t_map *map)
     int i;
 
     copy = malloc(sizeof(char *) * (map->height + 1));
+	if(!copy)
+		return (NULL);
     i = 0;
     while(i < map->height)
     {

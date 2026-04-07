@@ -31,11 +31,11 @@ void parse_file(t_map *map,char *filename)
     printf("-----CONFIG------\n[NO] -> %s\n[SO] -> %s\n"
         "[WE] -> %s\n[EA] -> %s\n[FLOOR] -> %d\n[CEILING] -> %d\n"
         ,map->no,map->so,map->we,map->ea,map->floor,map->ceiling);
-    extract_map(lines,map_start,map);
+    if(!extract_map(lines,map_start,map))
+		error_exit("Allocation failed");
     free_array(lines);
     validate_map(map);
     print_map(map);
-
 }
 void set_player_dir(t_player *player,char dir)
 {
