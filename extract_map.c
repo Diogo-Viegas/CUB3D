@@ -68,7 +68,10 @@ int extract_map(char **lines, int start, t_map *map)
     {
         map->grid[i] = create_padded_line(lines[j], map->width);
         if(!map->grid[i])
+        {
+            free_array_with_index(map->grid,i);
             return (0);
+        }
         i++;
         j++;
     }
