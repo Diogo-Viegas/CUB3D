@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/07 18:14:50 by gocaetan          #+#    #+#             */
+/*   Updated: 2026/04/07 18:14:51 by gocaetan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	game_loop(t_game *game)
@@ -14,13 +26,14 @@ int	game_loop(t_game *game)
 
 int	main(int argc, char **argv)
 {
+	t_game	game;
+
 	if (argc < 2)
 	{
 		printf("Error: missing map file argument\nUsage: %s <map_file>\n",
 			argv[0]);
 		return (1);
 	}
-	t_game game;
 	init_game(&game);
 	parse_file(&game.map, argv[1]);
 	init_player(&game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/07 15:19:25 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/07 18:33:49 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,23 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+// #define malloc(x) (NULL)
+
+typedef struct s_line
+{
+	float		x;
+	float		y;
+	float		x_inc;
+	float		y_inc;
+	int			steps;
+}				t_line;
+
+typedef struct s_point
+{
+	int			x;
+	int			y;
+}				t_point;
 
 typedef struct s_img
 {
@@ -141,11 +158,11 @@ void			init_player(t_game *game);
 void			init_game(t_game *game);
 // init_mlx.c
 void			init_mlx(t_game *game);
-int close_game(t_game *game);
+int				close_game(t_game *game);
 int				esc_close(int keycode, t_game *game);
 // image_utils
 void			put_pixel(t_img *img, int x, int y, int color);
-void			draw_square(t_img *img, int pos[2], int size, int color);
+void			draw_square(t_img *img, t_point pos, int size, int color);
 // keys.c
 int				key_press(int keycode, t_game *game);
 
@@ -157,11 +174,9 @@ void			perform_dda(t_ray *ray, t_game *game);
 void			calc_dist(t_ray *ray);
 void			draw_ray(t_img *img, t_player *player, t_ray *ray);
 void			cast_rays(t_game *game);
-void			draw_line(t_img *img, int start[2], int end[2], int color);
+void			draw_line(t_img *img, t_point start, t_point end, int color);
 // render_3d.c
 void			calc_wall_height(t_game *game, t_ray *ray);
-//void			draw_vertical_line(t_game *game, int x, int draw_start,
-//					int draw_end, int color);
 // textures.c
 void			calc_wall_x(t_game *game, t_ray *ray);
 void			calc_texture_x(t_ray *ray, t_img *texture);
@@ -175,8 +190,19 @@ void			render_minimap_rays(t_game *game);
 void			render_map(t_game *game);
 void			render_player(t_game *game);
 void			render_player_direction(t_game *game);
-//cleanup.c
-void clean_all(t_game *game);
-void free_array_with_index(char **arr,int i);
-void free_array(char **arr);
+// cleanup.c
+void			clean_all(t_game *game);
+void			free_array_with_index(char **arr, int i);
+void			free_array(char **arr);
+// read_file.c
+int				count_lines(char *file);
+int				is_valid_number(char *s);
+int				check_chars(t_map *map);
+int				check_player(t_map *map);
+void			rotate_right(t_game *game, double angle);
+void			rotate_left(t_game *game, double angle);
+void			free_map_grid(t_map *map);
+int				ends_with(char *path, char *sufix);
+void			print_map(t_map *map);
+int				get_texture_pixel(t_img *img, int x, int y);
 #endif

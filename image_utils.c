@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   image_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/07 18:14:25 by gocaetan          #+#    #+#             */
+/*   Updated: 2026/04/07 18:14:26 by gocaetan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	put_pixel(t_img *img, int x, int y, int color)
@@ -10,7 +22,7 @@ void	put_pixel(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_square(t_img *img, int pos[2], int size, int color)
+void	draw_square(t_img *img, t_point pos, int size, int color)
 {
 	int	x;
 	int	y;
@@ -21,7 +33,7 @@ void	draw_square(t_img *img, int pos[2], int size, int color)
 		x = 0;
 		while (x < size)
 		{
-			put_pixel(img, pos[0] + x, pos[1] + y, color);
+			put_pixel(img, pos.x + x, pos.y + y, color);
 			x++;
 		}
 		y++;

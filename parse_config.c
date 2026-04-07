@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_config.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/07 18:14:58 by gocaetan          #+#    #+#             */
+/*   Updated: 2026/04/07 18:14:59 by gocaetan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./libft/libft.h"
 #include "cub3d.h"
 
@@ -10,20 +22,6 @@ int	is_texture_line(char *line)
 {
 	return (starts_with(line, "NO ") || starts_with(line, "SO ")
 		|| starts_with(line, "WE ") || starts_with(line, "EA "));
-}
-void	parse_texture_line(char *line, t_map *map)
-{
-	line = skip_spaces(line);
-	if (starts_with(line, "NO "))
-		set_texture(&map->no, line + 2);
-	else if (starts_with(line, "SO "))
-		set_texture(&map->so, line + 2);
-	else if (starts_with(line, "WE "))
-		set_texture(&map->we, line + 2);
-	else if (starts_with(line, "EA "))
-		set_texture(&map->ea, line + 2);
-	else
-		error_exit("Invalid texture identifier");
 }
 
 void	parse_color_line(char *line, t_map *map)
@@ -42,6 +40,7 @@ void	parse_color_line(char *line, t_map *map)
 		map->ceiling = parse_color(line + 2);
 	}
 }
+
 void	validate_config(t_map *map)
 {
 	if (!map->no || !map->so || !map->we || !map->ea)
@@ -49,6 +48,7 @@ void	validate_config(t_map *map)
 	if (map->ceiling == -1 || map->floor == -1)
 		error_exit("Missing Color");
 }
+
 void	parse_config(char **lines, int map_start, t_map *map)
 {
 	int	i;

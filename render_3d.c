@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_3d.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/07 18:15:46 by gocaetan          #+#    #+#             */
+/*   Updated: 2026/04/07 18:39:22 by gocaetan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
+/*
 void	draw_vertical_line(t_game *game, int x, int draw_start, int draw_end,
 		int color)
 {
@@ -22,7 +35,7 @@ void	draw_vertical_line(t_game *game, int x, int draw_start, int draw_end,
 		y++;
 	}
 }
-
+*/
 void	calc_wall_height(t_game *game, t_ray *ray)
 {
 	if (ray->wall_dist < 1e-6)

@@ -6,7 +6,7 @@
 /*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:02:08 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/07 15:38:33 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/07 18:41:13 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	calc_wall_x(t_game *game, t_ray *ray)
 		ray->wallx = game->player.x + ray->wall_dist * ray->ray_dir_x;
 	ray->wallx -= floor(ray->wallx);
 }
+
 t_img	*get_wall_texture(t_game *game, t_ray *ray)
 {
 	if (ray->side == 0)
@@ -51,18 +52,35 @@ void	calc_texture_x(t_ray *ray, t_img *texture)
 	if (ray->side == 1 && ray->ray_dir_y < 0)
 		ray->tex_x = texture->width - ray->tex_x - 1;
 }
-int	get_texture_pixel(t_img *img, int x, int y)
-{
-	char	*dst;
 
-	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	return (*(unsigned int *)dst);
+static void	draw_wall(t_game *game, int x, t_ray *ray, t_img *texture)
+{
+	int	y;
+	int	texy;
+	int	color;
+
+	y = ray->draw_start;
+	ray->step = (double)texture->height / ray->line_height;
+	ray->tex_pos = (ray->draw_start - game->win_height / 2 + ray->line_height
+			/ 2) * ray->step;
+	while (y <= ray->draw_end)
+	{
+		texy = (int)ray->tex_pos;
+		if (texy < 0)
+			texy = 0;
+		if (texy >= texture->height)
+			texy = texture->height - 1;
+		color = get_texture_pixel(texture, ray->tex_x, texy);
+		put_pixel(&game->screen, x, y, color);
+		ray->tex_pos += ray->step;
+		y++;
+	}
 }
+
+// Parti em duas
 void	draw_textured_column(t_game *game, int x, t_ray *ray, t_img *texture)
 {
 	int	y;
-	int	texY;
-	int	color;
 
 	y = 0;
 	while (y < ray->draw_start)
@@ -70,52 +88,11 @@ void	draw_textured_column(t_game *game, int x, t_ray *ray, t_img *texture)
 		put_pixel(&game->screen, x, y, game->map.ceiling);
 		y++;
 	}
-	ray->step = (double)texture->height / ray->line_height;
-	ray->tex_pos = (ray->draw_start - game->win_height / 2 + ray->line_height
-			/ 2) * ray->step;
-	while (y <= ray->draw_end)
-	{
-		texY = (int)ray->tex_pos;
-		if (texY < 0)
-			texY = 0;
-		if (texY >= texture->height)
-			texY = texture->height - 1;
-		color = get_texture_pixel(texture, ray->tex_x, texY);
-		put_pixel(&game->screen, x, y, color);
-		ray->tex_pos += ray->step;
-		y++;
-	}
+	draw_wall(game, x, ray, texture);
+	y = ray->draw_end + 1;
 	while (y < game->win_height)
 	{
 		put_pixel(&game->screen, x, y, game->map.floor);
 		y++;
 	}
-}
-
-void	load_texture(t_game *game, t_img *tex, char *path)
-{
-	tex->img_ptr = mlx_xpm_file_to_image(game->mlx, path, &tex->width,
-			&tex->height);
-	if (!tex->img_ptr)
-	{
-		printf("Error loading texture: %s\n", path);
-		exit(1);
-	}
-	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len,
-			&tex->endian);
-	if (!tex->addr)
-	{
-		printf("Error getting texture addr\n");
-		exit(1);
-	}
-}
-
-void	init_textures(t_game *game)
-{
-	load_texture(game, &game->texture_no, game->map.no);
-	load_texture(game, &game->texture_so, game->map.so);
-	load_texture(game, &game->texture_ea, game->map.ea);
-	load_texture(game, &game->texture_we, game->map.we);
-	printf("North: %p addr:%p w:%d h:%d\n", game->texture_no.img_ptr,
-		game->texture_no.addr, game->texture_no.width, game->texture_no.height);
 }

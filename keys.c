@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keys.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/07 17:42:04 by gocaetan          #+#    #+#             */
+/*   Updated: 2026/04/07 18:14:48 by gocaetan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	move_right(t_game *game, double speed)
@@ -12,6 +24,7 @@ void	move_right(t_game *game, double speed)
 	if (game->map.grid[(int)new_y][(int)game->player.x] != '1')
 		game->player.y = new_y;
 }
+
 void	move_left(t_game *game, double speed)
 {
 	double	new_x;
@@ -24,27 +37,7 @@ void	move_left(t_game *game, double speed)
 	if (game->map.grid[(int)new_y][(int)game->player.x] != '1')
 		game->player.y = new_y;
 }
-void	rotate_left(t_game *game, double angle)
-{
-	double	old_dir_x;
-	double	old_plane_x;
 
-	old_dir_x = game->player.dir_x;
-	game->player.dir_x = game->player.dir_x * cos(angle) - game->player.dir_y
-		* sin(angle);
-	game->player.dir_y = old_dir_x * sin(angle) + game->player.dir_y
-		* cos(angle);
-	old_plane_x = game->player.plane_x;
-	game->player.plane_x = game->player.plane_x * cos(angle)
-		- game->player.plane_y * sin(angle);
-	game->player.plane_y = old_plane_x * sin(angle) + game->player.plane_y
-		* cos(angle);
-}
-
-void	rotate_right(t_game *game, double angle)
-{
-	rotate_left(game, -angle);
-}
 void	move_forward(t_game *game, double speed)
 {
 	double	new_x;
@@ -57,6 +50,7 @@ void	move_forward(t_game *game, double speed)
 	if (game->map.grid[(int)new_y][(int)game->player.x] != '1')
 		game->player.y = new_y;
 }
+
 void	move_backwards(t_game *game, double speed)
 {
 	double	new_x;
@@ -72,19 +66,19 @@ void	move_backwards(t_game *game, double speed)
 
 int	key_press(int keycode, t_game *game)
 {
-	if (keycode == 65307) // ESC
+	if (keycode == 65307)
 		close_game(game);
-	if (keycode == 119) // W
+	if (keycode == 119)
 		move_forward(game, 0.1);
-	if (keycode == 115) // S
+	if (keycode == 115)
 		move_backwards(game, 0.1);
-	if (keycode == 65361) // Right arrow
+	if (keycode == 65361)
 		rotate_right(game, 0.05);
-	if (keycode == 65363) // Left arrow
+	if (keycode == 65363)
 		rotate_left(game, 0.05);
-	if (keycode == 97) // A
+	if (keycode == 97)
 		move_left(game, 0.1);
-	if (keycode == 100) // D
+	if (keycode == 100)
 		move_right(game, 0.1);
 	return (0);
 }

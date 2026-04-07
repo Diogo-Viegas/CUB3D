@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   extract_map.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/07 17:37:13 by gocaetan          #+#    #+#             */
+/*   Updated: 2026/04/07 17:37:14 by gocaetan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./libft/libft.h"
 #include "cub3d.h"
 
@@ -78,4 +90,21 @@ int	extract_map(char **lines, int start, t_map *map)
 	}
 	map->grid[i] = NULL;
 	return (1);
+}
+
+void	free_map_grid(t_map *map)
+{
+	int	i;
+
+	if (!map->grid)
+		return ;
+	i = 0;
+	while (i < map->height)
+	{
+		free(map->grid[i]);
+		map->grid[i] = NULL;
+		i++;
+	}
+	free(map->grid);
+	map->grid = NULL;
 }

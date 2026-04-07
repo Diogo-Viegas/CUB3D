@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/07 17:40:00 by gocaetan          #+#    #+#             */
+/*   Updated: 2026/04/07 18:14:40 by gocaetan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	print_map(t_map *map)
@@ -15,6 +27,7 @@ void	print_map(t_map *map)
 	}
 	printf("----------------------------------------\n");
 }
+
 void	init_game(t_game *game)
 {
 	ft_memset(game, 0, sizeof(t_game));
@@ -22,30 +35,6 @@ void	init_game(t_game *game)
 	game->map.floor = -1;
 }
 
-void	parse_file(t_map *map, char *filename)
-{
-	char	**lines;
-	int		map_start;
-
-	lines = read_file(filename);
-	if (!lines)
-		error_exit("Failed to read file\n");
-	map_start = find_map_start(lines);
-	parse_config(lines, map_start, map);
-	printf("-----CONFIG------\n[NO] -> %s\n[SO] -> %s\n"
-			"[WE] -> %s\n[EA] -> %s\n[FLOOR] -> %d\n[CEILING] -> %d\n",
-			map->no,
-			map->so,
-			map->we,
-			map->ea,
-			map->floor,
-			map->ceiling);
-	if (!extract_map(lines, map_start, map))
-		error_exit("Allocation failed");
-	free_array(lines);
-	validate_map(map);
-	print_map(map);
-}
 void	set_player_dir(t_player *player, char dir)
 {
 	if (dir == 'N')
@@ -69,6 +58,7 @@ void	set_player_dir(t_player *player, char dir)
 		player->dir_y = 0;
 	}
 }
+
 void	set_player_fov(t_player *player, char dir)
 {
 	if (dir == 'N')
@@ -92,6 +82,7 @@ void	set_player_fov(t_player *player, char dir)
 		player->plane_y = 0.66;
 	}
 }
+
 void	init_player(t_game *game)
 {
 	int		y;

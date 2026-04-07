@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/07 18:15:08 by gocaetan          #+#    #+#             */
+/*   Updated: 2026/04/07 18:15:09 by gocaetan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	init_ray(t_ray *ray, t_game *game, int x)
@@ -17,6 +29,7 @@ void	init_ray(t_ray *ray, t_game *game, int x)
 		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 	ray->hit = 0;
 }
+
 void	clear_img(int width, int height, t_img *img)
 {
 	int	y;
@@ -85,67 +98,11 @@ void	perform_dda(t_ray *ray, t_game *game)
 			ray->hit = 1;
 	}
 }
+
 void	calc_dist(t_ray *ray)
 {
 	if (ray->side == 0)
 		ray->wall_dist = (ray->side_dist_x - ray->delta_dist_x);
 	else
 		ray->wall_dist = (ray->side_dist_y - ray->delta_dist_y);
-}
-
-void	draw_ray(t_img *img, t_player *player, t_ray *ray)
-{
-	int	start[2];
-	int	end[2];
-
-	start[0] = player->x * TILE_SIZE;
-	start[1] = player->y * TILE_SIZE;
-	end[0] = (player->x + ray->ray_dir_x * ray->wall_dist) * TILE_SIZE;
-	end[1] = (player->y + ray->ray_dir_y * ray->wall_dist) * TILE_SIZE;
-	draw_line(img, start, end, 0x00FF00);
-}
-void	cast_rays(t_game *game)
-{
-	t_ray	ray;
-	t_img	*texture;
-	int		x;
-
-	x = 0;
-	while (x < game->win_width)
-	{
-		init_ray(&ray, game, x);
-		init_dda(&ray, &game->player);
-		perform_dda(&ray, game);
-		calc_dist(&ray);
-		calc_wall_height(game, &ray);
-		calc_wall_x(game, &ray);
-		// color = 0x00FF00;
-		// if(ray.side == 1)
-		//	color = 0x008800;
-		// draw_vertical_line(game,x,draw_start,draw_end,color);
-		// draw_ray(&game->screen, &game->player, &ray);
-		texture = get_wall_texture(game, &ray);
-		calc_texture_x(&ray, texture);
-		draw_textured_column(game, x, &ray, texture);
-		x++;
-	}
-}
-void	draw_line(t_img *img, int start[2], int end[2], int color)
-{
-	int dx = end[0] - start[0];
-	int dy = end[1] - start[1];
-	int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
-
-	float x_inc = dx / (float)steps;
-	float y_inc = dy / (float)steps;
-
-	float x = start[0];
-	float y = start[1];
-
-	for (int i = 0; i <= steps; i++)
-	{
-		put_pixel(img, (int)x, (int)y, color);
-		x += x_inc;
-		y += y_inc;
-	}
 }

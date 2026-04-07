@@ -1,117 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_config_utils.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/07 17:49:15 by gocaetan          #+#    #+#             */
+/*   Updated: 2026/04/07 17:49:38 by gocaetan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./libft/libft.h"
 #include "cub3d.h"
 
-void	error_exit(char *msg)
-{
-	write(2, "Error\n", 6);
-	write(2, msg, ft_strlen(msg));
-	write(2, "\n", 1);
-	exit(1);
-}
-// remove spaces at the begining
-char	*skip_spaces(char *line)
-{
-	while (*line == ' ' || *line == '\t')
-		line++;
-	return (line);
-}
-
-int	is_empty_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	starts_with(char *line, char *prefix)
-{
-	int	i;
-
-	i = 0;
-	line = skip_spaces(line);
-	while (prefix[i])
-	{
-		if (line[i] != prefix[i])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-int	ends_with(char *path, char *sufix)
-{
-	int	extension;
-	int	i;
-
-	extension = ft_strlen(path) - 4;
-	i = 0;
-	while (path[extension] != '\0' && sufix[i] == path[extension])
-	{
-		extension++;
-		i++;
-	}
-	if ((int)ft_strlen(path) == extension)
-		return (1);
-	else
-		return (0);
-}
-void	set_texture(char **dst, char *line)
-{
-	char	*path;
-	int		i;
-
-	if (*dst != NULL)
-	{
-		error_exit("duplicate texture");
-	}
-	line = skip_spaces(line);
-	if (*line == '\0')
-		error_exit("Missing texture path");
-	i = 0;
-	while (line[i] && line[i] != ' ' && line[i] != '\t')
-		i++;
-	path = ft_substr(line, 0, i);
-	if (!path)
-		printf("Malloc Failed\n");
-	line += i;
-	line = skip_spaces(line);
-	if (*line != '\0')
-		error_exit("Invalid Texture format");
-	// validar extensao .xpm
-	if (!ends_with(path, ".xpm"))
-		error_exit("Texture must be .xpm");
-	*dst = path;
-}
-int	count_split(char **split)
-{
-	int	i;
-
-	i = 0;
-	if (!split)
-		return (0);
-	while (split[i] != NULL)
-		i++;
-	return (i);
-}
-int	is_valid_number(char *s)
-{
-	s = skip_spaces(s);
-	if (!*s)
-		return (0);
-	while (*s)
-	{
-		if (*s < '0' || *s > '9')
-			return (0);
-		s++;
-	}
-	return (1);
-}
 char	*trim_spaces(char *s)
 {
 	char	*end;
@@ -127,6 +28,7 @@ char	*trim_spaces(char *s)
 		end--;
 	return (ft_substr(start, 0, end - start + 1));
 }
+
 static void	free_rgb(char **rgb)
 {
 	int	i;

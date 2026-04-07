@@ -1,0 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/07 17:53:28 by gocaetan          #+#    #+#             */
+/*   Updated: 2026/04/07 18:33:38 by gocaetan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+void	load_texture(t_game *game, t_img *tex, char *path)
+{
+	tex->img_ptr = mlx_xpm_file_to_image(game->mlx, path, &tex->width,
+			&tex->height);
+	if (!tex->img_ptr)
+	{
+		printf("Error loading texture: %s\n", path);
+		exit(1);
+	}
+	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len,
+			&tex->endian);
+	if (!tex->addr)
+	{
+		printf("Error getting texture addr\n");
+		exit(1);
+	}
+}
+
+void	init_textures(t_game *game)
+{
+	load_texture(game, &game->texture_no, game->map.no);
+	load_texture(game, &game->texture_so, game->map.so);
+	load_texture(game, &game->texture_ea, game->map.ea);
+	load_texture(game, &game->texture_we, game->map.we);
+	printf("North: %p addr:%p w:%d h:%d\n", game->texture_no.img_ptr,
+		game->texture_no.addr, game->texture_no.width, game->texture_no.height);
+}
+
+void	parse_texture_line(char *line, t_map *map)
+{
+	line = skip_spaces(line);
+	if (starts_with(line, "NO "))
+		set_texture(&map->no, line + 2);
+	else if (starts_with(line, "SO "))
+		set_texture(&map->so, line + 2);
+	else if (starts_with(line, "WE "))
+		set_texture(&map->we, line + 2);
+	else if (starts_with(line, "EA "))
+		set_texture(&map->ea, line + 2);
+	else
+		error_exit("Invalid texture identifier");
+}
+
+int	get_texture_pixel(t_img *img, int x, int y)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	return (*(unsigned int *)dst);
+}

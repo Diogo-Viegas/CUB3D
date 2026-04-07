@@ -6,28 +6,11 @@
 /*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 10:45:03 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/07 15:36:59 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:37:00 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	free_map_grid(t_map *map)
-{
-	int	i;
-
-	if (!map->grid)
-		return ;
-	i = 0;
-	while (i < map->height)
-	{
-		free(map->grid[i]);
-		map->grid[i] = NULL;
-		i++;
-	}
-	free(map->grid);
-	map->grid = NULL;
-}
 
 void	free_array_with_index(char **arr, int i)
 {
@@ -54,7 +37,7 @@ void	free_array(char **arr)
 	}
 	free(arr);
 }
-// ft_substr em set_texture()
+
 void	free_map_textures(t_map *map)
 {
 	if (map->no)
@@ -78,7 +61,7 @@ void	free_map_textures(t_map *map)
 		map->we = NULL;
 	}
 }
-// destroi as texturas vindas da minilbx
+
 static void	destroy_texture(t_game *game, t_img *tex)
 {
 	if (tex->img_ptr)
@@ -87,6 +70,7 @@ static void	destroy_texture(t_game *game, t_img *tex)
 		tex->img_ptr = NULL;
 	}
 }
+
 void	clean_all(t_game *game)
 {
 	if (game->mlx)
