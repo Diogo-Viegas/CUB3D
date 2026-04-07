@@ -3,16 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:00:08 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/02 12:50:19 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/07 13:25:09 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft/libft.h"
 
+
+static void	free_copy(char **copy, int height)
+{
+	int	i;
+ 
+	i = 0;
+	while (i < height)
+	{
+		free(copy[i]);
+		i++;
+	}
+	free(copy);
+}
 
 int is_valid_char(char c)
 {
@@ -89,13 +102,21 @@ char **copy_map(t_map *map)
     char **copy;
     int i;
 
-    copy = malloc(sizeof(char *) * map->height);
+    copy = malloc(sizeof(char *) * (map->height + 1));
     i = 0;
     while(i < map->height)
     {
         copy[i] = ft_strdup(map->grid[i]);
+       	if (!copy[i])
+		{
+			while (--i >= 0)
+				free(copy[i]);
+			free(copy);
+			return (NULL);
+		}
         i++;
     }
+    copy[i] = NULL;
     return (copy);
 }
 int flood_fill(char **map,int x, int y,t_map *data)
@@ -127,8 +148,10 @@ int check_closed(t_map *map)
     int valid;
     find_player(map,&x,&y);
     copy = copy_map(map);
+    if(!copy)
+        error_exit("Memory allocation failed in check_closed");
     valid = flood_fill(copy,x,y,map);
-    //free_map(map);
+    free_copy(copy,map->height);
     return (valid);
 }
 int validate_map(t_map *map)
@@ -136,7 +159,7 @@ int validate_map(t_map *map)
     if(!check_chars(map))
         error_exit("Invalid characters in map");
     if(!check_player(map))
-        error_exit("Invalid num ber of players, only one player is valid");
+        error_exit("Invalid number of players, only one player is valid");
     if(!check_closed(map))
         error_exit("Map is not closed\n");
     return (1);

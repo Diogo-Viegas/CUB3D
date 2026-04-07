@@ -63,14 +63,10 @@ char **read_file(char *file)
     char **lines;
     char *line;
     if(!is_cub(file))
-    {
         error_exit("File must have .cub extension");
-    }
     count = count_lines(file);
     if(count == 0)
-    {
         error_exit("File is empty");
-    }
     fd = open(file,O_RDONLY);
     if(fd < 0)
         error_exit("Failed to open file at read file");

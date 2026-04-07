@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/06 16:47:29 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/07 14:24:02 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void			init_player(t_game *game);
 void			init_game(t_game *game);
 // init_mlx.c
 void			init_mlx(t_game *game);
-int				close_game(t_game *game);
+int close_game(t_game *game);
 int				esc_close(int keycode, t_game *game);
 // image_utils
 void			put_pixel(t_img *img, int x, int y, int color);
@@ -175,4 +175,8 @@ void			render_minimap_rays(t_game *game);
 void			render_map(t_game *game);
 void			render_player(t_game *game);
 void			render_player_direction(t_game *game);
+//cleanup.c
+void clean_all(t_game *game);
+void free_array_with_index(char **arr,int i);
+void free_array(char **arr);
 #endif

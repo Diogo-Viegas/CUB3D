@@ -1,7 +1,7 @@
 NAME = cub3D
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = read_file.c \
       parse_config.c \
@@ -11,7 +11,7 @@ SRC = read_file.c \
       validate_map.c \
       init_game.c \
       init_mlx.c image_utils.c keys.c raycasting.c render_3d.c \
-	  textures.c minimap.c
+	  textures.c minimap.c cleanup.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -23,7 +23,6 @@ void init_game(t_game *game)
 void parse_file(t_map *map,char *filename)
 {
     char **lines;
-    int i = 0;
     lines = read_file(filename);
     if(!lines)
         error_exit("Failed to read file\n");
@@ -32,13 +31,11 @@ void parse_file(t_map *map,char *filename)
     printf("-----CONFIG------\n[NO] -> %s\n[SO] -> %s\n"
         "[WE] -> %s\n[EA] -> %s\n[FLOOR] -> %d\n[CEILING] -> %d\n"
         ,map->no,map->so,map->we,map->ea,map->floor,map->ceiling);
-    i = 0;
     extract_map(lines,map_start,map);
+    free_array(lines);
     validate_map(map);
     print_map(map);
-    while (lines[i])
-        free(lines[i++]);
-    free(lines);
+
 }
 void set_player_dir(t_player *player,char dir)
 {

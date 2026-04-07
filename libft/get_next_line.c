@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:44:20 by dviegas           #+#    #+#             */
-/*   Updated: 2026/03/23 11:54:29 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/07 14:33:42 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,30 +47,45 @@ void	ft_cleanread(char *line, char *buffer)
 		buffer[i++] = '\0';
 }
 
+static char	*join_and_free(char *line, char *buffer)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(line, buffer);
+	free(line);
+	return (tmp);
+}
+
+static int	fill_buffer(int fd, char *buffer, char **line)
+{
+	int	bytes;
+
+	bytes = read(fd, buffer, BUFFER_SIZE);
+	if (bytes <= 0)
+	{
+		if (bytes < 0)
+			free(*line);
+		return (bytes);
+	}
+	buffer[bytes] = '\0';
+	return (bytes);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	buffer[BUFFER_SIZE + 1];
 	char		*line;
-	int			bytes;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = NULL;
 	while (ft_newline(line) == -1)
 	{
-		if (buffer[0] == '\0')
-		{
-			bytes = read(fd, buffer, BUFFER_SIZE);
-			if (bytes <= 0)
-			{
-				if (bytes == 0)
-					return (line);
-				free(line);
-				return (NULL);
-			}
-			buffer[bytes] = '\0';
-		}
-		line = ft_strjoin(line, buffer);
+		if (buffer[0] == '\0' && fill_buffer(fd, buffer, &line) <= 0)
+			return (line);
+		line = join_and_free(line, buffer);
+		if (!line)
+			return (NULL);
 		ft_cleanread(line, buffer);
 	}
 	return (line);
