@@ -25,7 +25,8 @@ void draw_vertical_line(t_game *game, int x, int draw_start, int draw_end, int c
 
 void calc_wall_height(t_game *game,t_ray *ray)
 {
-    
+    if (ray->wall_dist < 1e-6)
+        ray->wall_dist = 1e-6;
     ray->line_height = (int)(game->win_height / ray->wall_dist);
     printf("Ray->line_height : %d\n",ray->line_height);
     ray->draw_start = -ray->line_height / 2 + game->win_height / 2;
