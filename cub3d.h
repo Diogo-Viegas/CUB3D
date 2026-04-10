@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/07 18:33:49 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/10 12:05:26 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,4 +205,9 @@ void			free_map_grid(t_map *map);
 int				ends_with(char *path, char *sufix);
 void			print_map(t_map *map);
 int				get_texture_pixel(t_img *img, int x, int y);
+//read_file_utils.c
+int	is_cub(char *file);
+void	trim_newline(char *line);
+int	find_map_start(char **lines);
+int is_config_line(char *line);
 #endif

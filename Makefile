@@ -13,7 +13,8 @@ SRC = read_file.c \
       init_mlx.c image_utils.c keys.c raycasting.c render_3d.c \
 	  textures.c minimap.c cleanup.c \
 	  more_parsing_utils.c parsing_utils.c raycasting_utils.c \
-	  textures_utils.c validate_map_utils.c keys_utils.c
+	  textures_utils.c validate_map_utils.c keys_utils.c \
+	  read_file_utils.c
 
 
 OBJ = $(SRC:.c=.o)
