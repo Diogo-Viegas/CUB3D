@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_parsing_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:48:03 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/07 18:14:13 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/10 14:50:19 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,29 @@ void	error_exit(char *msg)
 	exit(1);
 }
 
-void	set_texture(char **dst, char *line)
+void	set_texture(t_game *game, char **dst, char *current_line, char **lines)
 {
 	char	*path;
 	int		i;
 
 	if (*dst != NULL)
 	{
+		free_array(lines);
+		clean_all(game);
 		error_exit("duplicate texture");
 	}
-	line = skip_spaces(line);
-	if (*line == '\0')
+	current_line = skip_spaces(current_line);
+	if (*current_line == '\0')
 		error_exit("Missing texture path");
 	i = 0;
-	while (line[i] && line[i] != ' ' && line[i] != '\t')
+	while (current_line[i] && current_line[i] != ' ' && current_line[i] != '\t')
 		i++;
-	path = ft_substr(line, 0, i);
+	path = ft_substr(current_line, 0, i);
 	if (!path)
 		printf("Malloc Failed\n");
-	line += i;
-	line = skip_spaces(line);
-	if (*line != '\0')
+	current_line += i;
+	current_line = skip_spaces(current_line);
+	if (*current_line != '\0')
 		error_exit("Invalid Texture format");
 	if (!ends_with(path, ".xpm"))
 		error_exit("Texture must be .xpm");

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:45:16 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/07 17:46:26 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/10 14:58:44 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	parse_file(t_map *map, char *filename)
+void	parse_file(t_game *game, t_map *map, char *filename)
 {
 	char	**lines;
 	int		map_start;
@@ -21,7 +21,7 @@ void	parse_file(t_map *map, char *filename)
 	if (!lines)
 		error_exit("Failed to read file\n");
 	map_start = find_map_start(lines);
-	parse_config(lines, map_start, map);
+	parse_config(game, lines, map_start, map);
 	printf("-----CONFIG------\n[NO] -> %s\n[SO] -> %s\n"
 		"[WE] -> %s\n[EA] -> %s\n[FLOOR] -> %d\n[CEILING] -> %d\n",
 		map->no,

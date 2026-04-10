@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 18:14:50 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/07 18:14:51 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/10 14:56:55 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	init_game(&game);
-	parse_file(&game.map, argv[1]);
+	parse_file(&game, &game.map, argv[1]);
 	init_player(&game);
 	init_mlx(&game);
 	init_textures(&game);

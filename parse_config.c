@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 18:14:58 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/07 18:14:59 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/10 14:43:27 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	validate_config(t_map *map)
 		error_exit("Missing Color");
 }
 
-void	parse_config(char **lines, int map_start, t_map *map)
+void	parse_config(t_game *game, char **lines, int map_start, t_map *map)
 {
 	int	i;
 
@@ -57,9 +57,9 @@ void	parse_config(char **lines, int map_start, t_map *map)
 	while (i < map_start)
 	{
 		if (is_empty_line(lines[i]))
-			;
+			return ;
 		else if (is_texture_line(lines[i]))
-			parse_texture_line(lines[i], map);
+			parse_texture_line(game, lines[i], map, lines);
 		else if (is_color_line(lines[i]))
 			parse_color_line(lines[i], map);
 		else

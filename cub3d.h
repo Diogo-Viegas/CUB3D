@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/10 12:05:26 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/10 14:43:05 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,17 +131,17 @@ typedef struct s_ray
 // parse_config.c
 int				is_color_line(char *line);
 int				is_texture_line(char *line);
-void			parse_texture_line(char *line, t_map *map);
+void			parse_texture_line(t_game *game,char *line, t_map *map,char **lines);
 void			parse_color_line(char *line, t_map *map);
 void			validate_config(t_map *map);
-void			parse_config(char **lines, int map_start, t_map *map);
+void			parse_config(t_game *game,char **lines, int map_start, t_map *map);
 
 // parse_config_utils.c
 void			error_exit(char *msg);
 char			*skip_spaces(char *line);
 int				is_empty_line(char *line);
 int				starts_with(char *line, char *prefix);
-void			set_texture(char **dst, char *line);
+void			set_texture(t_game *game,char **dst, char *line,char **lines);
 int				count_split(char **split);
 int				parse_color(char *line);
 // extract_map.c
@@ -153,7 +153,7 @@ int				find_map_start(char **lines);
 int				validate_map(t_map *map);
 char			find_player(t_map *map, int *x, int *y);
 // init_game.c
-void			parse_file(t_map *map, char *filename);
+void			parse_file(t_game *game,t_map *map, char *filename);
 void			init_player(t_game *game);
 void			init_game(t_game *game);
 // init_mlx.c

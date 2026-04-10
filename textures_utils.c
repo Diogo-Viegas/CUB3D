@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:53:28 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/07 18:33:38 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/10 14:42:58 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,19 @@ void	init_textures(t_game *game)
 	load_texture(game, &game->texture_so, game->map.so);
 	load_texture(game, &game->texture_ea, game->map.ea);
 	load_texture(game, &game->texture_we, game->map.we);
-	printf("North: %p addr:%p w:%d h:%d\n", game->texture_no.img_ptr,
-		game->texture_no.addr, game->texture_no.width, game->texture_no.height);
 }
 
-void	parse_texture_line(char *line, t_map *map)
+void	parse_texture_line(t_game *game, char *line, t_map *map, char **lines)
 {
 	line = skip_spaces(line);
 	if (starts_with(line, "NO "))
-		set_texture(&map->no, line + 2);
+		set_texture(game, &map->no, line + 2, lines);
 	else if (starts_with(line, "SO "))
-		set_texture(&map->so, line + 2);
+		set_texture(game, &map->so, line + 2, lines);
 	else if (starts_with(line, "WE "))
-		set_texture(&map->we, line + 2);
+		set_texture(game, &map->we, line + 2, lines);
 	else if (starts_with(line, "EA "))
-		set_texture(&map->ea, line + 2);
+		set_texture(game, &map->ea, line + 2, lines);
 	else
 		error_exit("Invalid texture identifier");
 }
