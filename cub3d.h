@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/10 14:43:05 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/10 19:13:17 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,4 +210,6 @@ int	is_cub(char *file);
 void	trim_newline(char *line);
 int	find_map_start(char **lines);
 int is_config_line(char *line);
+//set_texture.c
+void	set_texture(t_game *game, char **dst, char *line, char **lines);
 #endif

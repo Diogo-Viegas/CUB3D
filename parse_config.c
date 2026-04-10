@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 18:14:58 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/10 14:43:27 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/10 19:32:28 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	parse_config(t_game *game, char **lines, int map_start, t_map *map)
 	while (i < map_start)
 	{
 		if (is_empty_line(lines[i]))
-			return ;
+			;
 		else if (is_texture_line(lines[i]))
 			parse_texture_line(game, lines[i], map, lines);
 		else if (is_color_line(lines[i]))

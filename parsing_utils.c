@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:45:16 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/10 14:58:44 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/10 15:35:29 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ void	parse_file(t_game *game, t_map *map, char *filename)
 		map->floor,
 		map->ceiling);
 	if (!extract_map(lines, map_start, map))
+	{
+		free_array(lines);
+		clean_all(game);
 		error_exit("Allocation failed");
+	}
 	free_array(lines);
 	validate_map(map);
 	print_map(map);

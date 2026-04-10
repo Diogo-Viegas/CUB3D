@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:37:13 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/07 17:37:14 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/10 19:17:39 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

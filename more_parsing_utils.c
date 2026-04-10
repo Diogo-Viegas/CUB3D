@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:48:03 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/10 14:50:19 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/10 19:11:49 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,35 +44,6 @@ void	error_exit(char *msg)
 	write(2, msg, ft_strlen(msg));
 	write(2, "\n", 1);
 	exit(1);
-}
-
-void	set_texture(t_game *game, char **dst, char *current_line, char **lines)
-{
-	char	*path;
-	int		i;
-
-	if (*dst != NULL)
-	{
-		free_array(lines);
-		clean_all(game);
-		error_exit("duplicate texture");
-	}
-	current_line = skip_spaces(current_line);
-	if (*current_line == '\0')
-		error_exit("Missing texture path");
-	i = 0;
-	while (current_line[i] && current_line[i] != ' ' && current_line[i] != '\t')
-		i++;
-	path = ft_substr(current_line, 0, i);
-	if (!path)
-		printf("Malloc Failed\n");
-	current_line += i;
-	current_line = skip_spaces(current_line);
-	if (*current_line != '\0')
-		error_exit("Invalid Texture format");
-	if (!ends_with(path, ".xpm"))
-		error_exit("Texture must be .xpm");
-	*dst = path;
 }
 
 int	count_lines(char *file)
