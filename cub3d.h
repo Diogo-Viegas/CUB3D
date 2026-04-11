@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/11 22:38:52 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/11 23:04:47 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int				is_color_line(char *line);
 int				is_texture_line(char *line);
 void			parse_texture_line(t_game *game,char *line, t_map *map,char **lines);
 void			parse_color_line(char *line,char **lines,t_map *map,t_game *game);
-void			validate_config(t_map *map);
+void			validate_config(t_map *map,t_game *game,char **lines);
 void			parse_config(t_game *game,char **lines, int map_start, t_map *map);
 
 // parse_config_utils.c

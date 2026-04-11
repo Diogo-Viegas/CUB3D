@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 18:14:58 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/11 22:38:26 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/11 23:04:19 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,25 @@ void	parse_color_line(char *line,char **lines, t_map *map,t_game *game)
 	if (starts_with(line, "F "))
 	{
 		if (map->floor != -1)
-			error_exit("Duplicate floor color");
+			cleanup_error(game,lines,"Duplicate floor color");
 		map->floor = parse_color(line +2,lines,game);
 	}
 	else if (starts_with(line, "C "))
 	{
 		if (map->ceiling != -1)
-			error_exit("Duplicate ceiling color");
+		{
+			cleanup_error(game,lines,"Duplicate ceiling color");
+		}
 		map->ceiling = parse_color(line + 2,lines,game);
 	}
 }
 
-void	validate_config(t_map *map)
+void	validate_config(t_map *map,t_game *game,char **lines )
 {
 	if (!map->no || !map->so || !map->we || !map->ea)
-		error_exit("Missing Textures");
+		cleanup_error(game,lines,"Missing Textures");
 	if (map->ceiling == -1 || map->floor == -1)
-		error_exit("Missing Color");
+		cleanup_error(game,lines,"Missing Color");
 }
 
 void	parse_config(t_game *game, char **lines, int map_start, t_map *map)
@@ -63,8 +65,8 @@ void	parse_config(t_game *game, char **lines, int map_start, t_map *map)
 		else if (is_color_line(lines[i]))
 			parse_color_line(lines[i],lines, map,game);
 		else
-			error_exit("Invalid config line");
+			cleanup_error(game,lines,"Invalid config line");
 		i++;
 	}
-	validate_config(map);
+	validate_config(map,game,lines);
 }
