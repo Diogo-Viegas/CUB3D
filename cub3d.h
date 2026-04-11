@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/10 19:13:17 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/11 22:38:52 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ typedef struct s_ray
 int				is_color_line(char *line);
 int				is_texture_line(char *line);
 void			parse_texture_line(t_game *game,char *line, t_map *map,char **lines);
-void			parse_color_line(char *line, t_map *map);
+void			parse_color_line(char *line,char **lines,t_map *map,t_game *game);
 void			validate_config(t_map *map);
 void			parse_config(t_game *game,char **lines, int map_start, t_map *map);
 
@@ -143,7 +143,7 @@ int				is_empty_line(char *line);
 int				starts_with(char *line, char *prefix);
 void			set_texture(t_game *game,char **dst, char *line,char **lines);
 int				count_split(char **split);
-int				parse_color(char *line);
+int				parse_color(char *line,char **lines,t_game *game);
 // extract_map.c
 int				extract_map(char **lines, int start, t_map *map);
 // read_line.c
@@ -212,4 +212,5 @@ int	find_map_start(char **lines);
 int is_config_line(char *line);
 //set_texture.c
 void	set_texture(t_game *game, char **dst, char *line, char **lines);
+void	cleanup_error(t_game *game, char **lines, char *msg);
 #endif

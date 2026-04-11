@@ -6,13 +6,13 @@
 /*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 19:10:57 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/10 19:15:50 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/11 22:31:45 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	cleanup_error(t_game *game, char **lines, char *msg)
+ void	cleanup_error(t_game *game, char **lines, char *msg)
 {
 	free_array(lines);
 	clean_all(game);
