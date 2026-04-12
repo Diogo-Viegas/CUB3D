@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:53:28 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/10 14:42:58 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/12 13:25:06 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	load_texture(t_game *game, t_img *tex, char *path)
 			&tex->height);
 	if (!tex->img_ptr)
 	{
-		printf("Error loading texture: %s\n", path);
-		exit(1);
+		clean_all(game);
+		error_exit("Texture not Found");
 	}
 	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len,
 			&tex->endian);
 	if (!tex->addr)
 	{
-		printf("Error getting texture addr\n");
-		exit(1);
+		clean_all(game);
+		error_exit("Error getting texture addr");
 	}
 }
 

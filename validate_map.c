@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:00:08 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/07 17:59:41 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/12 13:31:06 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	flood_fill(char **map, int x, int y, t_map *data)
 	return (1);
 }
 
-int	check_closed(t_map *map)
+int	check_closed(t_map *map,t_game *game)
 {
 	int		x;
 	int		y;
@@ -79,20 +79,35 @@ int	check_closed(t_map *map)
 
 	find_player(map, &x, &y);
 	copy = copy_map(map);
+	free_array(copy);
+	copy = NULL;
 	if (!copy)
+	{
+		clean_all(game);
 		error_exit("Memory allocation failed in check_closed");
+	}
 	valid = flood_fill(copy, x, y, map);
 	free_copy(copy, map->height);
 	return (valid);
 }
 
-int	validate_map(t_map *map)
+void	validate_map(t_map *map,t_game *game)
 {
 	if (!check_chars(map))
+	{
+		clean_all(game);
 		error_exit("Invalid characters in map");
+	}
 	if (!check_player(map))
+	{
+		clean_all(game);
 		error_exit("Invalid number of players, only one player is valid");
-	if (!check_closed(map))
+	}
+		
+	if (!check_closed(map,game))
+	{
+		clean_all(game);
 		error_exit("Map is not closed\n");
-	return (1);
+	}
+		
 }

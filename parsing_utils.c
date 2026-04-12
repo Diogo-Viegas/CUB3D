@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:45:16 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/11 22:07:13 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/12 13:17:09 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	parse_file(t_game *game, t_map *map, char *filename)
 		error_exit("Allocation failed");
 	}
 	free_array(lines);
-	validate_map(map);
+	validate_map(map,game);
 	print_map(map);
 }
 

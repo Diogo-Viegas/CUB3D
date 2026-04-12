@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/11 23:04:47 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/12 13:21:42 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int				extract_map(char **lines, int start, t_map *map);
 char			**read_file(char *file);
 int				find_map_start(char **lines);
 // validate_map.c
-int				validate_map(t_map *map);
+void				validate_map(t_map *map,t_game *game);
 char			find_player(t_map *map, int *x, int *y);
 // init_game.c
 void			parse_file(t_game *game,t_map *map, char *filename);
