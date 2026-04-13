@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/13 10:59:33 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/13 12:31:09 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,6 @@ void			rotate_right(t_game *game, double angle);
 void			rotate_left(t_game *game, double angle);
 void			free_map_grid(t_map *map);
 int				ends_with(char *path, char *sufix);
-void			print_map(t_map *map);
 int				get_texture_pixel(t_img *img, int x, int y);
 //read_file_utils.c
 int	is_cub(char *file);

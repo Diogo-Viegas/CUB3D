@@ -101,11 +101,9 @@ void	validate_map(t_game *game)
 		clean_all(game);
 		error_exit("Invalid number of players, only one player is valid");
 	}
-		
 	if (!check_closed(game))
 	{
 		clean_all(game);
 		error_exit("Map is not closed\n");
 	}
-		
 }

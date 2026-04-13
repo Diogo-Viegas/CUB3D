@@ -38,7 +38,7 @@ void	init_textures(t_game *game)
 	load_texture(game, &game->texture_we, game->map.we);
 }
 
-void	parse_texture_line(t_game *game, char *line,char **lines)
+void	parse_texture_line(t_game *game, char *line, char **lines)
 {
 	line = skip_spaces(line);
 	if (starts_with(line, "NO "))

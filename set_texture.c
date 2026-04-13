@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
- void	cleanup_error(t_game *game, char **lines, char *msg)
+void	cleanup_error(t_game *game, char **lines, char *msg)
 {
 	free_array(lines);
 	clean_all(game);
@@ -38,14 +38,13 @@ static char	*extract_path(char *line, t_game *game, char **lines)
 		free(path);
 		cleanup_error(game, lines, "Invalid texture format");
 	}
-    if(!ends_with(path, ".xpm"))
-    {
-        free(path);
-        cleanup_error(game, lines, "File must be .xpm");
-    }
+	if (!ends_with(path, ".xpm"))
+	{
+		free(path);
+		cleanup_error(game, lines, "File must be .xpm");
+	}
 	return (path);
 }
-
 
 void	set_texture(t_game *game, char **dst, char *line, char **lines)
 {

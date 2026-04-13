@@ -24,31 +24,31 @@ int	is_texture_line(char *line)
 		|| starts_with(line, "WE ") || starts_with(line, "EA "));
 }
 
-void	parse_color_line(t_game *game,char *line,char **lines)
+void	parse_color_line(t_game *game, char *line, char **lines)
 {
 	line = skip_spaces(line);
 	if (starts_with(line, "F "))
 	{
 		if (game->map.floor != -1)
-			cleanup_error(game,lines,"Duplicate floor color");
-		game->map.floor = parse_color(line +2,lines,game);
+			cleanup_error(game, lines, "Duplicate floor color");
+		game->map.floor = parse_color(line + 2, lines, game);
 	}
 	else if (starts_with(line, "C "))
 	{
 		if (game->map.ceiling != -1)
 		{
-			cleanup_error(game,lines,"Duplicate ceiling color");
+			cleanup_error(game, lines, "Duplicate ceiling color");
 		}
-		game->map.ceiling = parse_color(line + 2,lines,game);
+		game->map.ceiling = parse_color(line + 2, lines, game);
 	}
 }
 
-void	validate_config(t_game *game,char **lines )
+void	validate_config(t_game *game, char **lines)
 {
 	if (!game->map.no || !game->map.so || !game->map.we || !game->map.ea)
-		cleanup_error(game,lines,"Missing Textures");
+		cleanup_error(game, lines, "Missing Textures");
 	if (game->map.ceiling == -1 || game->map.floor == -1)
-		cleanup_error(game,lines,"Missing Color");
+		cleanup_error(game, lines, "Missing Color");
 }
 
 void	parse_config(t_game *game, char **lines, int map_start)
@@ -61,12 +61,12 @@ void	parse_config(t_game *game, char **lines, int map_start)
 		if (is_empty_line(lines[i]))
 			;
 		else if (is_texture_line(lines[i]))
-			parse_texture_line(game, lines[i],lines);
+			parse_texture_line(game, lines[i], lines);
 		else if (is_color_line(lines[i]))
-			parse_color_line(game,lines[i],lines);
+			parse_color_line(game, lines[i], lines);
 		else
-			cleanup_error(game,lines,"Invalid config line");
+			cleanup_error(game, lines, "Invalid config line");
 		i++;
 	}
-	validate_config(game,lines);
+	validate_config(game, lines);
 }

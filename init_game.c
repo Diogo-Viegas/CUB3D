@@ -3,30 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:40:00 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/07 18:14:40 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/13 12:31:31 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	print_map(t_map *map)
-{
-	int	i;
 
-	printf("--------------MAP--------------\n");
-	printf("Height -> %d\n", map->height);
-	printf("Width -> %d\n", map->width);
-	i = 0;
-	while (i < map->height)
-	{
-		printf("%s\n", map->grid[i]);
-		i++;
-	}
-	printf("----------------------------------------\n");
-}
+
 
 void	init_game(t_game *game)
 {
@@ -95,9 +82,4 @@ void	init_player(t_game *game)
 	set_player_dir(&game->player, dir);
 	game->map.grid[y][x] = '0';
 	set_player_fov(&game->player, dir);
-	printf("[Player] -> [%0.2f] [%0.2f]\n", game->player.y, game->player.x);
-	printf("[Player Dir x] -> %f\n", game->player.dir_x);
-	printf("[Player Dir y] -> %f\n", game->player.dir_y);
-	printf("[Player Fov x] -> %f\n", game->player.plane_x);
-	printf("[Player Fov y] -> %f\n", game->player.plane_y);
 }

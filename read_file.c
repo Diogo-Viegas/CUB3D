@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:53:55 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/11 22:14:35 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/13 12:30:28 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ char	**read_file(char *file)
 	if (fd < 0)
 		error_exit("Failed to open file at read file");
 	lines = malloc(sizeof(char *) * (count + 1));
-	free(lines);
 	if (!lines)
+	{
+		close(fd);
 		return (NULL);
+	}
 	fill_lines(lines, fd);
 	close(fd);
 	return (lines);
