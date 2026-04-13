@@ -6,14 +6,11 @@
 /*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:40:00 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/13 12:31:31 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/13 12:45:03 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
-
 
 void	init_game(t_game *game)
 {

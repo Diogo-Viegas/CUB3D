@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 18:14:50 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/13 12:33:07 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/13 12:39:23 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 	{
-		error_exit("Error: missing map file argument");
+		error_exit("Missing map file argument");
 	}
 	init_game(&game);
 	parse_file(&game, argv[1]);

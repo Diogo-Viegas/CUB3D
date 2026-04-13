@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:45:16 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/13 12:31:20 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/13 12:45:21 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	parse_file(t_game *game, char *filename)
 		error_exit("Failed to read file\n");
 	map_start = find_map_start(lines);
 	parse_config(game, lines, map_start);
-
 	if (!extract_map(lines, map_start, &game->map))
 	{
 		free_array(lines);
