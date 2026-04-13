@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:45:16 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/12 13:17:09 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/13 11:00:32 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	parse_file(t_game *game, t_map *map, char *filename)
+void	parse_file(t_game *game,char *filename)
 {
 	char	**lines;
 	int		map_start;
@@ -21,24 +21,24 @@ void	parse_file(t_game *game, t_map *map, char *filename)
 	if (!lines)
 		error_exit("Failed to read file\n");
 	map_start = find_map_start(lines);
-	parse_config(game, lines, map_start, map);
+	parse_config(game, lines, map_start);
 	printf("-----CONFIG------\n[NO] -> %s\n[SO] -> %s\n"
 		"[WE] -> %s\n[EA] -> %s\n[FLOOR] -> %d\n[CEILING] -> %d\n",
-		map->no,
-		map->so,
-		map->we,
-		map->ea,
-		map->floor,
-		map->ceiling);
-	if (!extract_map(lines, map_start, map))
+		game->map.no,
+		game->map.so,
+		game->map.we,
+		game->map.ea,
+		game->map.floor,
+		game->map.ceiling);
+	if (!extract_map(lines, map_start,&game->map))
 	{
 		free_array(lines);
 		clean_all(game);
 		error_exit("Allocation failed");
 	}
 	free_array(lines);
-	validate_map(map,game);
-	print_map(map);
+	validate_map(game);
+	print_map(&game->map);
 }
 
 char	*skip_spaces(char *line)

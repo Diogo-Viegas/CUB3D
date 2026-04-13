@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:53:28 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/12 13:25:06 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/13 10:48:03 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ void	init_textures(t_game *game)
 	load_texture(game, &game->texture_we, game->map.we);
 }
 
-void	parse_texture_line(t_game *game, char *line, t_map *map, char **lines)
+void	parse_texture_line(t_game *game, char *line,char **lines)
 {
 	line = skip_spaces(line);
 	if (starts_with(line, "NO "))
-		set_texture(game, &map->no, line + 2, lines);
+		set_texture(game, &game->map.no, line + 2, lines);
 	else if (starts_with(line, "SO "))
-		set_texture(game, &map->so, line + 2, lines);
+		set_texture(game, &game->map.so, line + 2, lines);
 	else if (starts_with(line, "WE "))
-		set_texture(game, &map->we, line + 2, lines);
+		set_texture(game, &game->map.we, line + 2, lines);
 	else if (starts_with(line, "EA "))
-		set_texture(game, &map->ea, line + 2, lines);
+		set_texture(game, &game->map.ea, line + 2, lines);
 	else
 		error_exit("Invalid texture identifier");
 }

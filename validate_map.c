@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:00:08 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/12 13:31:06 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/13 10:58:59 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,41 +70,39 @@ int	flood_fill(char **map, int x, int y, t_map *data)
 	return (1);
 }
 
-int	check_closed(t_map *map,t_game *game)
+int	check_closed(t_game *game)
 {
 	int		x;
 	int		y;
 	char	**copy;
 	int		valid;
 
-	find_player(map, &x, &y);
-	copy = copy_map(map);
-	free_array(copy);
-	copy = NULL;
+	find_player(&game->map, &x, &y);
+	copy = copy_map(&game->map);
 	if (!copy)
 	{
 		clean_all(game);
 		error_exit("Memory allocation failed in check_closed");
 	}
-	valid = flood_fill(copy, x, y, map);
-	free_copy(copy, map->height);
+	valid = flood_fill(copy, x, y, &game->map);
+	free_copy(copy, game->map.height);
 	return (valid);
 }
 
-void	validate_map(t_map *map,t_game *game)
+void	validate_map(t_game *game)
 {
-	if (!check_chars(map))
+	if (!check_chars(&game->map))
 	{
 		clean_all(game);
 		error_exit("Invalid characters in map");
 	}
-	if (!check_player(map))
+	if (!check_player(&game->map))
 	{
 		clean_all(game);
 		error_exit("Invalid number of players, only one player is valid");
 	}
 		
-	if (!check_closed(map,game))
+	if (!check_closed(game))
 	{
 		clean_all(game);
 		error_exit("Map is not closed\n");

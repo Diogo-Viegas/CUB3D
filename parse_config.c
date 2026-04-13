@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 18:14:58 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/11 23:04:19 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/13 10:54:54 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,34 @@ int	is_texture_line(char *line)
 		|| starts_with(line, "WE ") || starts_with(line, "EA "));
 }
 
-void	parse_color_line(char *line,char **lines, t_map *map,t_game *game)
+void	parse_color_line(t_game *game,char *line,char **lines)
 {
 	line = skip_spaces(line);
 	if (starts_with(line, "F "))
 	{
-		if (map->floor != -1)
+		if (game->map.floor != -1)
 			cleanup_error(game,lines,"Duplicate floor color");
-		map->floor = parse_color(line +2,lines,game);
+		game->map.floor = parse_color(line +2,lines,game);
 	}
 	else if (starts_with(line, "C "))
 	{
-		if (map->ceiling != -1)
+		if (game->map.ceiling != -1)
 		{
 			cleanup_error(game,lines,"Duplicate ceiling color");
 		}
-		map->ceiling = parse_color(line + 2,lines,game);
+		game->map.ceiling = parse_color(line + 2,lines,game);
 	}
 }
 
-void	validate_config(t_map *map,t_game *game,char **lines )
+void	validate_config(t_game *game,char **lines )
 {
-	if (!map->no || !map->so || !map->we || !map->ea)
+	if (!game->map.no || !game->map.so || !game->map.we || !game->map.ea)
 		cleanup_error(game,lines,"Missing Textures");
-	if (map->ceiling == -1 || map->floor == -1)
+	if (game->map.ceiling == -1 || game->map.floor == -1)
 		cleanup_error(game,lines,"Missing Color");
 }
 
-void	parse_config(t_game *game, char **lines, int map_start, t_map *map)
+void	parse_config(t_game *game, char **lines, int map_start)
 {
 	int	i;
 
@@ -61,12 +61,12 @@ void	parse_config(t_game *game, char **lines, int map_start, t_map *map)
 		if (is_empty_line(lines[i]))
 			;
 		else if (is_texture_line(lines[i]))
-			parse_texture_line(game, lines[i], map, lines);
+			parse_texture_line(game, lines[i],lines);
 		else if (is_color_line(lines[i]))
-			parse_color_line(lines[i],lines, map,game);
+			parse_color_line(game,lines[i],lines);
 		else
 			cleanup_error(game,lines,"Invalid config line");
 		i++;
 	}
-	validate_config(map,game,lines);
+	validate_config(game,lines);
 }

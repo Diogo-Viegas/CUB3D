@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/12 13:21:42 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/13 10:59:33 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,10 @@ typedef struct s_ray
 // parse_config.c
 int				is_color_line(char *line);
 int				is_texture_line(char *line);
-void			parse_texture_line(t_game *game,char *line, t_map *map,char **lines);
-void			parse_color_line(char *line,char **lines,t_map *map,t_game *game);
-void			validate_config(t_map *map,t_game *game,char **lines);
-void			parse_config(t_game *game,char **lines, int map_start, t_map *map);
+void			parse_texture_line(t_game *game,char *line,char **lines);
+void			parse_color_line(t_game *game,char *line,char **lines);
+void			validate_config(t_game *game,char **lines);
+void			parse_config(t_game *game,char **lines, int map_start);
 
 // parse_config_utils.c
 void			error_exit(char *msg);
@@ -150,10 +150,10 @@ int				extract_map(char **lines, int start, t_map *map);
 char			**read_file(char *file);
 int				find_map_start(char **lines);
 // validate_map.c
-void				validate_map(t_map *map,t_game *game);
+void				validate_map(t_game *game);
 char			find_player(t_map *map, int *x, int *y);
 // init_game.c
-void			parse_file(t_game *game,t_map *map, char *filename);
+void			parse_file(t_game *game, char *filename);
 void			init_player(t_game *game);
 void			init_game(t_game *game);
 // init_mlx.c
