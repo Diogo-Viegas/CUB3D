@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 18:14:42 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/07 18:37:57 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/13 13:02:15 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	esc_close(int keycode, t_game *game)
 	return (0);
 }
 
-//Parti em duas
+// Parti em duas
 static void	init_screen(t_game *game)
 {
 	game->screen.img_ptr = mlx_new_image(game->mlx, game->win_width,
@@ -63,5 +63,8 @@ void	init_mlx(t_game *game)
 		clean_all(game);
 		error_exit("Failed to create MLX window");
 	}
+	mlx_mouse_move(game->mlx, game->win, game->win_width / 2, game->win_height
+		/ 2);
+	mlx_hook(game->win, 6, 1L << 6, mouse_move_hook, game);
 	init_screen(game);
 }
