@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/13 13:05:44 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/17 16:53:12 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ typedef struct s_game
 	t_img		texture_so;
 	t_img		texture_ea;
 	t_img		texture_we;
+	t_img		door;
+	t_img		door_close;
 }				t_game;
 
 typedef struct s_ray
@@ -117,6 +119,7 @@ typedef struct s_ray
 	int			step_x;
 	int			step_y;
 	int			hit;
+	int			door;
 	int			side;
 	int			line_height;
 	int			draw_start;

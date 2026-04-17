@@ -6,7 +6,7 @@
 /*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 18:00:00 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/07 18:13:10 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/17 14:55:40 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_valid_char(char c)
 {
 	return (c == '0' || c == '1' || c == 'W' || c == 'N' || c == 'S' || c == 'E'
-		|| c == ' ');
+		|| c == ' ' || c == 'D');
 }
 
 int	is_player(char c)
