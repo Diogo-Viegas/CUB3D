@@ -6,22 +6,11 @@
 /*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:42:04 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/17 17:15:50 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/21 12:46:59 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int is_blocked(t_game *game, int x, int y)
-{
-	char tile;
-	tile = game->map.grid[y][x];
-	if(tile == '1')
-		return(1);
-	if(tile == 'D')
-		return(1);
-	return(0);
-}
 
 void	move_right(t_game *game, double speed)
 {
@@ -77,6 +66,9 @@ void	move_backwards(t_game *game, double speed)
 
 int	key_press(int keycode, t_game *game)
 {
+	int	x;
+	int	y;
+
 	if (keycode == 65307)
 		close_game(game);
 	if (keycode == 119)
@@ -91,5 +83,11 @@ int	key_press(int keycode, t_game *game)
 		move_left(game, 0.1);
 	if (keycode == 100)
 		move_right(game, 0.1);
+	if (keycode == 101)
+	{
+		x = (int)(game->player.x + game->player.dir_x);
+		y = (int)(game->player.y + game->player.dir_y);
+		open_door(game, x, y);
+	}
 	return (0);
 }

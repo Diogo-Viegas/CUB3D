@@ -6,7 +6,7 @@
 /*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:02:08 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/17 16:56:41 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/21 12:48:15 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	calc_wall_x(t_game *game, t_ray *ray)
 
 t_img	*get_wall_texture(t_game *game, t_ray *ray)
 {
-	if(ray->door == 1)
-		return(&game->door);
+	if (ray->door == 1)
+		return (&game->door_texture);
 	if (ray->side == 0)
 	{
 		if (ray->ray_dir_x > 0)

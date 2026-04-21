@@ -6,7 +6,7 @@
 /*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:53:28 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/17 16:57:52 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/21 10:47:29 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	init_textures(t_game *game)
 	load_texture(game, &game->texture_so, game->map.so);
 	load_texture(game, &game->texture_ea, game->map.ea);
 	load_texture(game, &game->texture_we, game->map.we);
-	load_texture(game, &game->door, "textures/door.xpm");
+	load_texture(game, &game->door_texture, "textures/door4.xpm");
 }
 
 void	parse_texture_line(t_game *game, char *line, char **lines)

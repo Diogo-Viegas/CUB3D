@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 18:14:50 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/13 12:39:23 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/04/21 11:00:59 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int argc, char **argv)
 	init_game(&game);
 	parse_file(&game, argv[1]);
 	init_player(&game);
+	init_doors(&game);
 	init_mlx(&game);
 	init_textures(&game);
 	mlx_loop_hook(game.mlx, game_loop, &game);

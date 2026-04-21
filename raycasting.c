@@ -6,7 +6,7 @@
 /*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 18:15:08 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/17 16:59:27 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/21 12:55:37 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,10 @@ void	perform_dda(t_ray *ray, t_game *game)
 		}
 		if (game->map.grid[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
-		if(game->map.grid[ray->map_y][ray->map_x] == 'D')
-		{
-			ray->door = 1;
-			ray->hit = 1;
-		}
+		door_colision(game, ray);
 	}
 }
+
 void	calc_dist(t_ray *ray)
 {
 	if (ray->side == 0)

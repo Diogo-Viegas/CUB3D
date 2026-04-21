@@ -6,7 +6,7 @@
 /*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:58:14 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/07 17:58:31 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/21 12:45:56 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,17 @@ void	draw_line(t_img *img, t_point start, t_point end, int color)
 		line.x += line.x_inc;
 		line.y += line.y_inc;
 		i++;
+	}
+}
+
+void	door_colision(t_game *game, t_ray *ray)
+{
+	if (game->map.grid[ray->map_y][ray->map_x] == 'D')
+	{
+		if (!is_door_open(game, ray->map_x, ray->map_y))
+		{
+			ray->door = 1;
+			ray->hit = 1;
+		}
 	}
 }

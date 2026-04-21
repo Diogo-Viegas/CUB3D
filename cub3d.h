@@ -6,7 +6,7 @@
 /*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/17 16:53:12 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/21 12:47:43 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,13 @@ typedef struct s_map
 	int			ceiling;
 }				t_map;
 
+typedef struct s_door
+{
+	int			x;
+	int			y;
+	int			is_open;
+}				t_door;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -99,8 +106,9 @@ typedef struct s_game
 	t_img		texture_so;
 	t_img		texture_ea;
 	t_img		texture_we;
-	t_img		door;
-	t_img		door_close;
+	t_img		door_texture;
+	t_door		*doors;
+	int			door_count;
 }				t_game;
 
 typedef struct s_ray
@@ -179,6 +187,7 @@ void			calc_dist(t_ray *ray);
 void			draw_ray(t_img *img, t_player *player, t_ray *ray);
 void			cast_rays(t_game *game);
 void			draw_line(t_img *img, t_point start, t_point end, int color);
+void			door_colision(t_game *game, t_ray *ray);
 // render_3d.c
 void			calc_wall_height(t_game *game, t_ray *ray);
 // textures.c
@@ -216,4 +225,11 @@ int				is_config_line(char *line);
 // set_texture.c
 void			set_texture(t_game *game, char **dst, char *line, char **lines);
 void			cleanup_error(t_game *game, char **lines, char *msg);
+// door.c
+int				is_door_open(t_game *game, int x, int y);
+void			open_door(t_game *game, int x, int y);
+void			count_doors(t_game *game);
+void			init_doors(t_game *game);
+int				is_blocked(t_game *game, int x, int y);
+
 #endif

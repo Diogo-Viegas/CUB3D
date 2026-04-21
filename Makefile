@@ -14,7 +14,7 @@ SRC = read_file.c \
 	  textures.c minimap.c cleanup.c \
 	  more_parsing_utils.c parsing_utils.c raycasting_utils.c \
 	  textures_utils.c validate_map_utils.c keys_utils.c \
-	  read_file_utils.c set_texture.c
+	  read_file_utils.c set_texture.c door.c minimap_utils.c
 
 
 OBJ = $(SRC:.c=.o)
@@ -34,6 +34,8 @@ BLUE = \033[0;34m
 RED = \033[0;31m
 RESET = \033[0m
 
+REPO = https://github.com/42paris/minilibx-linux.git
+
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
@@ -48,6 +50,9 @@ $(LIBFT):
 $(MLX):
 	@echo "$(YELLOW)🖼️  Compiling MiniLibX...$(RESET)"
 	@$(MAKE) -C $(MLX_DIR) --no-print-directory -s
+
+mlx:
+	git clone $(REPO)
 
 %.o: %.c
 	@echo "$(YELLOW)⚙️  Compiling $<...$(RESET)"
