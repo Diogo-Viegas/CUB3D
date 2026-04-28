@@ -6,7 +6,7 @@
 /*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 10:45:03 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/21 13:10:49 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/28 10:49:24 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	clean_all(t_game *game)
 		destroy_texture(game, &game->texture_so);
 		destroy_texture(game, &game->texture_ea);
 		destroy_texture(game, &game->texture_we);
+		destroy_texture(game, &game->door_texture);
 		if (game->screen.img_ptr)
 		{
 			mlx_destroy_image(game->mlx, game->screen.img_ptr);
@@ -95,4 +96,5 @@ void	clean_all(t_game *game)
 	}
 	free_map_grid(&game->map);
 	free_map_textures(&game->map);
+	free_doors(game);
 }

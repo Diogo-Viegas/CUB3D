@@ -6,7 +6,7 @@
 /*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/21 12:47:43 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/04/28 10:49:47 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ void			render_player_direction(t_game *game);
 void			clean_all(t_game *game);
 void			free_array_with_index(char **arr, int i);
 void			free_array(char **arr);
+void			free_doors(t_game *game);
 // read_file.c
 int				count_lines(char *file);
 int				is_valid_number(char *s);
