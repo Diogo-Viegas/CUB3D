@@ -51,6 +51,7 @@ void	init_mlx(t_game *game)
 	game->win_width = 1280;
 	game->win_height = 720;
 	game->mlx = mlx_init();
+	game->mouse_enabled = 1;
 	if (!game->mlx)
 	{
 		clean_all(game);

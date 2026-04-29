@@ -46,5 +46,5 @@ void	trim_newline(char *line)
 
 int	is_cub(char *file)
 {
-	return (ft_strnstr(file, ".cub", ft_strlen(file)) != NULL);
+	return (ft_strcmp(file, ".cub") != 0);
 }

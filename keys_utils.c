@@ -41,6 +41,8 @@ int	mouse_move_hook(int x, int y, t_game *game)
 	double	sensibility;
 
 	(void)y;
+	if(!game->mouse_enabled)
+		return(0);
 	center_x = game->win_width / 2;
 	delta_x = x - center_x;
 	sensibility = -0.002;
@@ -51,3 +53,4 @@ int	mouse_move_hook(int x, int y, t_game *game)
 	mlx_mouse_move(game->mlx, game->win, center_x, game->win_height / 2);
 	return (0);
 }
+

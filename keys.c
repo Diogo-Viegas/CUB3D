@@ -89,5 +89,7 @@ int	key_press(int keycode, t_game *game)
 		y = (int)(game->player.y + game->player.dir_y);
 		open_door(game, x, y);
 	}
+	if(keycode == 65513)
+		game->mouse_enabled = !game->mouse_enabled;
 	return (0);
 }

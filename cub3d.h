@@ -109,6 +109,7 @@ typedef struct s_game
 	t_img		door_texture;
 	t_door		*doors;
 	int			door_count;
+	int 		mouse_enabled;
 }				t_game;
 
 typedef struct s_ray
