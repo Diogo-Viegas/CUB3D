@@ -74,7 +74,10 @@ int	parse_color(char *line, char **lines, t_game *game)
 	line = skip_spaces(line);
 	rgb = ft_split(line, ',');
 	if (!rgb || count_split(rgb) != 3)
-		error_exit("Invalid color format");
+	{
+		free_array(rgb);
+		cleanup_error(game, lines, "Invalid color format");
+	}
 	trim_rgb_tokens(rgb);
 	if (!validate_rgb(rgb))
 	{
