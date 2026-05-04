@@ -109,7 +109,7 @@ typedef struct s_game
 	t_img		door_texture;
 	t_door		*doors;
 	int			door_count;
-	int 		mouse_enabled;
+	int			mouse_enabled;
 }				t_game;
 
 typedef struct s_ray
@@ -178,6 +178,7 @@ void			draw_square(t_img *img, t_point pos, int size, int color);
 // keys.c
 int				key_press(int keycode, t_game *game);
 int				mouse_move_hook(int x, int y, t_game *game);
+void			move_right(t_game *game, double speed);
 
 // raycasting.c
 void			init_ray(t_ray *ray, t_game *game, int x);

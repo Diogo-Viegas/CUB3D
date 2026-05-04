@@ -29,6 +29,19 @@ void	rotate_left(t_game *game, double angle)
 		* cos(angle);
 }
 
+void	move_right(t_game *game, double speed)
+{
+	double	new_x;
+	double	new_y;
+
+	new_x = game->player.x - game->player.dir_y * speed;
+	new_y = game->player.y + game->player.dir_x * speed;
+	if (!is_blocked(game, (int)new_x, (int)game->player.y))
+		game->player.x = new_x;
+	if (!is_blocked(game, (int)game->player.x, (int)new_y))
+		game->player.y = new_y;
+}
+
 void	rotate_right(t_game *game, double angle)
 {
 	rotate_left(game, -angle);
@@ -41,8 +54,8 @@ int	mouse_move_hook(int x, int y, t_game *game)
 	double	sensibility;
 
 	(void)y;
-	if(!game->mouse_enabled)
-		return(0);
+	if (!game->mouse_enabled)
+		return (0);
 	center_x = game->win_width / 2;
 	delta_x = x - center_x;
 	sensibility = -0.002;
@@ -53,4 +66,3 @@ int	mouse_move_hook(int x, int y, t_game *game)
 	mlx_mouse_move(game->mlx, game->win, center_x, game->win_height / 2);
 	return (0);
 }
-

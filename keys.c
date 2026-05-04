@@ -12,19 +12,6 @@
 
 #include "cub3d.h"
 
-void	move_right(t_game *game, double speed)
-{
-	double	new_x;
-	double	new_y;
-
-	new_x = game->player.x - game->player.dir_y * speed;
-	new_y = game->player.y + game->player.dir_x * speed;
-	if (!is_blocked(game, (int)new_x, (int)game->player.y))
-		game->player.x = new_x;
-	if (!is_blocked(game, (int)game->player.x, (int)new_y))
-		game->player.y = new_y;
-}
-
 void	move_left(t_game *game, double speed)
 {
 	double	new_x;
@@ -64,7 +51,7 @@ void	move_backwards(t_game *game, double speed)
 		game->player.y = new_y;
 }
 
-int	key_press(int keycode, t_game *game)
+void	handle_keys(int keycode, t_game *game)
 {
 	int	x;
 	int	y;
@@ -89,7 +76,12 @@ int	key_press(int keycode, t_game *game)
 		y = (int)(game->player.y + game->player.dir_y);
 		open_door(game, x, y);
 	}
-	if(keycode == 65513)
+}
+
+int	key_press(int keycode, t_game *game)
+{
+	handle_keys(keycode, game);
+	if (keycode == 65513)
 		game->mouse_enabled = !game->mouse_enabled;
 	return (0);
 }
