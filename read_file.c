@@ -13,7 +13,6 @@
 #include "./libft/libft.h"
 #include "cub3d.h"
 
-// Parti em duas
 static void	fill_lines(char **lines, int fd)
 {
 	char	*line;

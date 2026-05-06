@@ -6,7 +6,7 @@
 /*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:48:30 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/07 15:45:49 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/05/06 10:25:21 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ size_t				ft_strlcat(char *dst, const char *src, size_t size);
 size_t				ft_strlcpy(char *dest, const char *src, size_t size);
 size_t				ft_strlen(const char *str);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-int	ft_strcmp(char *s1, char *s2);
+int					ft_strcmp(char *s1, char *s2);
 int					ft_strncmp(char *s1, char *s2, unsigned int n);
 char				*ft_strnstr(const char *big, const char *little,
 						size_t len);
