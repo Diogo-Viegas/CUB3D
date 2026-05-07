@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 12:03:47 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/10 12:09:45 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/05/07 11:52:55 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,8 @@ void	trim_newline(char *line)
 
 int	is_cub(char *file)
 {
-	return (ft_strcmp(file, ".cub") != 0);
+	int	len;
+
+	len = ft_strlen(file);
+	return (len > 4 && ft_strcmp(file + len - 4, ".cub") == 0);
 }

@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 18:14:42 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/13 13:02:15 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/05/07 11:56:57 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	init_mlx(t_game *game)
 		clean_all(game);
 		error_exit("Failed to create MLX window");
 	}
+	mlx_mouse_hide(game->mlx, game->win);
 	mlx_mouse_move(game->mlx, game->win, game->win_width / 2, game->win_height
 		/ 2);
 	mlx_hook(game->win, 6, 1L << 6, mouse_move_hook, game);

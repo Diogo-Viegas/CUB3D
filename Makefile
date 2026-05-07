@@ -15,7 +15,7 @@ SRC = read_file.c \
 	  more_parsing_utils.c parsing_utils.c raycasting_utils.c \
 	  textures_utils.c validate_map_utils.c keys_utils.c \
 	  read_file_utils.c set_texture.c door.c minimap_utils.c \
-	  cleanup_utils.c
+	  cleanup_utils.c moves.c
 
 
 OBJ = $(SRC:.c=.o)

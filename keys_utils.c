@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:41:43 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/21 12:47:27 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/05/07 11:56:31 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,6 @@ void	rotate_left(t_game *game, double angle)
 		- game->player.plane_y * sin(angle);
 	game->player.plane_y = old_plane_x * sin(angle) + game->player.plane_y
 		* cos(angle);
-}
-
-void	move_right(t_game *game, double speed)
-{
-	double	new_x;
-	double	new_y;
-
-	new_x = game->player.x - game->player.dir_y * speed;
-	new_y = game->player.y + game->player.dir_x * speed;
-	if (!is_blocked(game, (int)new_x, (int)game->player.y))
-		game->player.x = new_x;
-	if (!is_blocked(game, (int)game->player.x, (int)new_y))
-		game->player.y = new_y;
 }
 
 void	rotate_right(t_game *game, double angle)
@@ -64,5 +51,22 @@ int	mouse_move_hook(int x, int y, t_game *game)
 	else if (delta_x < 0)
 		rotate_left(game, -delta_x * sensibility);
 	mlx_mouse_move(game->mlx, game->win, center_x, game->win_height / 2);
+	return (0);
+}
+
+int	key_release(int keycode, t_game *game)
+{
+	if (keycode == 119)
+		game->keys.w = 0;
+	if (keycode == 115)
+		game->keys.s = 0;
+	if (keycode == 65361)
+		game->keys.left = 0;
+	if (keycode == 65363)
+		game->keys.right = 0;
+	if (keycode == 97)
+		game->keys.a = 0;
+	if (keycode == 100)
+		game->keys.d = 0;
 	return (0);
 }

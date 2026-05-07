@@ -48,6 +48,6 @@ void	render_minimap_rays(t_game *game)
 		perform_dda(&ray, game);
 		calc_dist(&ray);
 		draw_ray_minimap(&game->screen, &game->player, &ray);
-		x += 40;
+		x += 90;
 	}
 }

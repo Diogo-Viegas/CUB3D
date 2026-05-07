@@ -12,43 +12,20 @@
 
 #include "cub3d.h"
 
-void	move_left(t_game *game, double speed)
+void	process_continuous_movement(t_game *game)
 {
-	double	new_x;
-	double	new_y;
-
-	new_x = game->player.x + game->player.dir_y * speed;
-	new_y = game->player.y - game->player.dir_x * speed;
-	if (!is_blocked(game, (int)new_x, (int)game->player.y))
-		game->player.x = new_x;
-	if (!is_blocked(game, (int)game->player.x, (int)new_y))
-		game->player.y = new_y;
-}
-
-void	move_forward(t_game *game, double speed)
-{
-	double	new_x;
-	double	new_y;
-
-	new_x = game->player.x + game->player.dir_x * speed;
-	new_y = game->player.y + game->player.dir_y * speed;
-	if (!is_blocked(game, (int)new_x, (int)game->player.y))
-		game->player.x = new_x;
-	if (!is_blocked(game, (int)game->player.x, (int)new_y))
-		game->player.y = new_y;
-}
-
-void	move_backwards(t_game *game, double speed)
-{
-	double	new_x;
-	double	new_y;
-
-	new_x = game->player.x - game->player.dir_x * speed;
-	new_y = game->player.y - game->player.dir_y * speed;
-	if (!is_blocked(game, (int)new_x, (int)game->player.y))
-		game->player.x = new_x;
-	if (!is_blocked(game, (int)game->player.x, (int)new_y))
-		game->player.y = new_y;
+	if (game->keys.w)
+		move_forward(game, 0.03);
+	if (game->keys.s)
+		move_backwards(game, 0.03);
+	if (game->keys.a)
+		move_left(game, 0.03);
+	if (game->keys.d)
+		move_right(game, 0.03);
+	if (game->keys.left)
+		rotate_right(game, 0.02);
+	if (game->keys.right)
+		rotate_left(game, 0.02);
 }
 
 void	handle_keys(int keycode, t_game *game)
@@ -59,17 +36,17 @@ void	handle_keys(int keycode, t_game *game)
 	if (keycode == 65307)
 		close_game(game);
 	if (keycode == 119)
-		move_forward(game, 0.1);
+		game->keys.w = 1;
 	if (keycode == 115)
-		move_backwards(game, 0.1);
+		game->keys.s = 1;
 	if (keycode == 65361)
-		rotate_right(game, 0.05);
+		game->keys.left = 1;
 	if (keycode == 65363)
-		rotate_left(game, 0.05);
+		game->keys.right = 1;
 	if (keycode == 97)
-		move_left(game, 0.1);
+		game->keys.a = 1;
 	if (keycode == 100)
-		move_right(game, 0.1);
+		game->keys.d = 1;
 	if (keycode == 101)
 	{
 		x = (int)(game->player.x + game->player.dir_x);

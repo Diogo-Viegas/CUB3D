@@ -50,15 +50,3 @@ void	render_map(t_game *game)
 		y++;
 	}
 }
-
-void	render_player_direction(t_game *game)
-{
-	t_point	start;
-	t_point	end;
-
-	start.x = MINIMAP_OFFSET_X + game->player.x * MINIMAP_SCALE;
-	start.y = MINIMAP_OFFSET_Y + game->player.y * MINIMAP_SCALE;
-	end.x = start.x + game->player.dir_x * 15;
-	end.y = start.y + game->player.dir_y * 15;
-	draw_line(&game->screen, start, end, 0xFF0000);
-}

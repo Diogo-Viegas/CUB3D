@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/04/28 10:49:47 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/05/07 11:38:00 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,8 +177,9 @@ void			put_pixel(t_img *img, int x, int y, int color);
 void			draw_square(t_img *img, t_point pos, int size, int color);
 // keys.c
 int				key_press(int keycode, t_game *game);
+int				key_release(int keycode, t_game *game);
 int				mouse_move_hook(int x, int y, t_game *game);
-void			move_right(t_game *game, double speed);
+void			process_continuous_movement(t_game *game);
 
 // raycasting.c
 void			init_ray(t_ray *ray, t_game *game, int x);
@@ -234,5 +235,9 @@ void			open_door(t_game *game, int x, int y);
 void			count_doors(t_game *game);
 void			init_doors(t_game *game);
 int				is_blocked(t_game *game, int x, int y);
-
+//moves.c
+void			move_right(t_game *game, double speed);
+void			move_left(t_game *game, double speed);
+void			move_forward(t_game *game, double speed);
+void			move_backwards(t_game *game, double speed);
 #endif

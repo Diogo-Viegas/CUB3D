@@ -1,4 +1,0 @@
-ilhas
-apagar uma das cores e deixar a virgula
-.cub usar o strcmp
-o rato tem que fechar a janela
