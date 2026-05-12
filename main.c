@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 18:14:50 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/21 11:00:59 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/05/07 16:39:09 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	game_loop(t_game *game)
 {
 	clear_img(game->win_width, game->win_height, &game->screen);
-	process_continuous_movement(game);
+	process_movement(game);
 	cast_rays(game);
 	render_map(game);
 	render_minimap_rays(game);

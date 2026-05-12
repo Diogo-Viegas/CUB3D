@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:42:04 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/21 12:46:59 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/05/07 16:39:03 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	process_continuous_movement(t_game *game)
+void	process_movement(t_game *game)
 {
 	if (game->keys.w)
 		move_forward(game, 0.03);

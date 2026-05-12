@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/05/07 11:38:00 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/05/12 12:05:02 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 # define TILE_SIZE 32
-# define MINIMAP_SCALE 8
+# define MINIMAP_SCALE 15
 # define MINIMAP_OFFSET_X 10
 # define MINIMAP_OFFSET_Y 10
 # include "libft/libft.h"
@@ -156,6 +156,7 @@ int				starts_with(char *line, char *prefix);
 void			set_texture(t_game *game, char **dst, char *line, char **lines);
 int				count_split(char **split);
 int				parse_color(char *line, char **lines, t_game *game);
+void			check_commas(t_game *game, char **lines, char *line);
 // extract_map.c
 int				extract_map(char **lines, int start, t_map *map);
 // read_line.c
@@ -179,7 +180,7 @@ void			draw_square(t_img *img, t_point pos, int size, int color);
 int				key_press(int keycode, t_game *game);
 int				key_release(int keycode, t_game *game);
 int				mouse_move_hook(int x, int y, t_game *game);
-void			process_continuous_movement(t_game *game);
+void			process_movement(t_game *game);
 
 // raycasting.c
 void			init_ray(t_ray *ray, t_game *game, int x);
@@ -235,7 +236,7 @@ void			open_door(t_game *game, int x, int y);
 void			count_doors(t_game *game);
 void			init_doors(t_game *game);
 int				is_blocked(t_game *game, int x, int y);
-//moves.c
+// moves.c
 void			move_right(t_game *game, double speed);
 void			move_left(t_game *game, double speed);
 void			move_forward(t_game *game, double speed);

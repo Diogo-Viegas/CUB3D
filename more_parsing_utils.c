@@ -6,7 +6,7 @@
 /*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:48:03 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/11 20:26:51 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/05/12 12:11:20 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,23 @@ int	count_lines(char *file)
 	}
 	close(fd);
 	return (count);
+}
+
+void	check_commas(t_game *game, char **lines, char *line)
+{
+	int		commas;
+	char	*p;
+
+	commas = 0;
+	p = line;
+	while (*p)
+	{
+		if (*p == ',')
+			commas++;
+		p++;
+	}
+	if (commas != 2)
+		cleanup_error(game, lines, "Invalid color format");
+	else
+		return ;
 }

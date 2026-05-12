@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 18:14:58 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/13 10:54:54 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/05/12 12:06:27 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ void	parse_color_line(t_game *game, char *line, char **lines)
 	line = skip_spaces(line);
 	if (starts_with(line, "F "))
 	{
+		check_commas(game, lines, line);
 		if (game->map.floor != -1)
 			cleanup_error(game, lines, "Duplicate floor color");
 		game->map.floor = parse_color(line + 2, lines, game);
 	}
 	else if (starts_with(line, "C "))
 	{
+		check_commas(game, lines, line);
 		if (game->map.ceiling != -1)
 		{
 			cleanup_error(game, lines, "Duplicate ceiling color");

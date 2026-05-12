@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 18:15:08 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/21 12:55:37 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/05/12 12:09:49 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,25 @@ void	init_ray(t_ray *ray, t_game *game, int x)
 	ray->door = 0;
 }
 
-void	clear_img(int width, int height, t_img *img)
+void	cast_rays(t_game *game)
 {
-	int	y;
-	int	x;
+	t_ray	ray;
+	t_img	*texture;
+	int		x;
 
-	y = 0;
-	while (y < height)
+	x = 0;
+	while (x < game->win_width)
 	{
-		x = 0;
-		while (x < width)
-		{
-			put_pixel(img, x, y, 0x000000);
-			x++;
-		}
-		y++;
+		init_ray(&ray, game, x);
+		init_dda(&ray, &game->player);
+		perform_dda(&ray, game);
+		calc_dist(&ray);
+		calc_wall_height(game, &ray);
+		calc_wall_x(game, &ray);
+		texture = get_wall_texture(game, &ray);
+		calc_texture_x(&ray, texture);
+		draw_textured_column(game, x, &ray, texture);
+		x++;
 	}
 }
 

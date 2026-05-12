@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:58:14 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/04/21 12:45:56 by gocaetan         ###   ########.fr       */
+/*   Updated: 2026/05/12 12:11:16 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,6 @@ void	draw_ray(t_img *img, t_player *player, t_ray *ray)
 	end.x = (player->x + ray->ray_dir_x * ray->wall_dist) * TILE_SIZE;
 	end.y = (player->y + ray->ray_dir_y * ray->wall_dist) * TILE_SIZE;
 	draw_line(img, start, end, 0x00FF00);
-}
-
-void	cast_rays(t_game *game)
-{
-	t_ray	ray;
-	t_img	*texture;
-	int		x;
-
-	x = 0;
-	while (x < game->win_width)
-	{
-		init_ray(&ray, game, x);
-		init_dda(&ray, &game->player);
-		perform_dda(&ray, game);
-		calc_dist(&ray);
-		calc_wall_height(game, &ray);
-		calc_wall_x(game, &ray);
-		texture = get_wall_texture(game, &ray);
-		calc_texture_x(&ray, texture);
-		draw_textured_column(game, x, &ray, texture);
-		x++;
-	}
 }
 
 static void	init_line(t_point start, t_point end, t_line *line)
@@ -88,5 +66,23 @@ void	door_colision(t_game *game, t_ray *ray)
 			ray->door = 1;
 			ray->hit = 1;
 		}
+	}
+}
+
+void	clear_img(int width, int height, t_img *img)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		while (x < width)
+		{
+			put_pixel(img, x, y, 0x000000);
+			x++;
+		}
+		y++;
 	}
 }
