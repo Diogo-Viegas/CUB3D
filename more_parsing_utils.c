@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_parsing_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: gocaetan <gocaetan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:48:03 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/05/12 12:11:20 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/05/15 12:30:09 by gocaetan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,6 @@ int	is_valid_number(char *s)
 		s++;
 	}
 	return (1);
-}
-
-void	error_exit(char *msg)
-{
-	write(2, "Error\n", 6);
-	write(2, msg, ft_strlen(msg));
-	write(2, "\n", 1);
-	exit(1);
-}
-
-void	cleanup_exit(t_game *game, char **lines, char *msg)
-{
-	if (lines)
-		free_array(lines);
-	if (game)
-		clean_all(game);
-	error_exit(msg);
 }
 
 int	count_lines(char *file)
