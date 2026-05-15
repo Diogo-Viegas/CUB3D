@@ -46,6 +46,15 @@ void	error_exit(char *msg)
 	exit(1);
 }
 
+void	cleanup_exit(t_game *game, char **lines, char *msg)
+{
+	if (lines)
+		free_array(lines);
+	if (game)
+		clean_all(game);
+	error_exit(msg);
+}
+
 int	count_lines(char *file)
 {
 	int		fd;

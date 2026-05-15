@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 17:42:04 by gocaetan          #+#    #+#             */
-/*   Updated: 2026/05/07 16:39:03 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/05/15 10:42:51 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	process_movement(t_game *game)
 {
 	if (game->keys.w)
-		move_forward(game, 0.03);
+		move_forward(game, 0.02);
 	if (game->keys.s)
-		move_backwards(game, 0.03);
+		move_backwards(game, 0.02);
 	if (game->keys.a)
-		move_left(game, 0.03);
+		move_left(game, 0.02);
 	if (game->keys.d)
-		move_right(game, 0.03);
+		move_right(game, 0.02);
 	if (game->keys.left)
-		rotate_right(game, 0.02);
+		rotate_right(game, 0.01);
 	if (game->keys.right)
-		rotate_left(game, 0.02);
+		rotate_left(game, 0.01);
 }
 
 void	handle_keys(int keycode, t_game *game)

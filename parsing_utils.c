@@ -28,8 +28,8 @@ void	parse_file(t_game *game, char *filename)
 		clean_all(game);
 		error_exit("Allocation failed");
 	}
-	free_array(lines);
 	validate_map(game);
+	free_array(lines);
 }
 
 char	*skip_spaces(char *line)

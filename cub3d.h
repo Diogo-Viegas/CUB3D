@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dviegas <dviegas@student.42lisboa.com>     +#+  +:+       +#+        */
+/*   By: dviegas <dviegas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 16:09:41 by dviegas           #+#    #+#             */
-/*   Updated: 2026/05/12 12:05:02 by dviegas          ###   ########.fr       */
+/*   Updated: 2026/05/15 10:41:38 by dviegas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 # define TILE_SIZE 32
-# define MINIMAP_SCALE 15
+# define MINIMAP_SCALE 5
 # define MINIMAP_OFFSET_X 10
 # define MINIMAP_OFFSET_Y 10
 # include "libft/libft.h"
@@ -150,6 +150,7 @@ void			parse_config(t_game *game, char **lines, int map_start);
 
 // parse_config_utils.c
 void			error_exit(char *msg);
+void			cleanup_exit(t_game *game, char **lines, char *msg);
 char			*skip_spaces(char *line);
 int				is_empty_line(char *line);
 int				starts_with(char *line, char *prefix);
